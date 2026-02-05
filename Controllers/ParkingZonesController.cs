@@ -118,6 +118,30 @@ namespace SystemRejestracjiParkingowej.Controllers
 
             if (zone == null) return NotFound();
 
+            // NOWY KOD - Sprawdź aktywne rezerwacje w całej strefie
+            var spotsIds = zone.ParkingSpots.Select(s => s.Id).ToList();
+            
+            var activeReservationsCount = 0;
+            var totalReservationsCount = 0;
+            
+            if (spotsIds.Any())
+            {
+                activeReservationsCount = await _context.Reservations
+                    .CountAsync(r => spotsIds.Contains(r.ParkingSpotId) && 
+                                (r.Status == "Confirmed" || r.Status == "Pending" || r.Status == "Active"));
+
+                totalReservationsCount = await _context.Reservations
+                    .CountAsync(r => spotsIds.Contains(r.ParkingSpotId));
+            }
+
+            ViewBag.ActiveReservations = activeReservationsCount;
+            ViewBag.TotalReservations = totalReservationsCount;
+
+            if (activeReservationsCount > 0)
+            {
+                ViewBag.Error = $"Nie można usunąć strefy! Miejsca w tej strefie mają {activeReservationsCount} aktywnych rezerwacji.";
+            }
+
             return View(zone);
         }
 
@@ -129,15 +153,43 @@ namespace SystemRejestracjiParkingowej.Controllers
                 .Include(z => z.ParkingSpots)
                 .FirstOrDefaultAsync(z => z.Id == id);
 
-            if (zone != null)
+            if (zone == null)
             {
-                _context.ParkingSpots.RemoveRange(zone.ParkingSpots);
-                _context.ParkingZones.Remove(zone);
-
-                await _context.SaveChangesAsync();
-                TempData["Success"] = "Strefa parkingowa została usunięta pomyślnie!";
+                return NotFound();
             }
 
+            // NOWY KOD - Sprawdź aktywne rezerwacje w całej strefie
+            var spotsIds = zone.ParkingSpots.Select(s => s.Id).ToList();
+            
+            var activeReservationsCount = await _context.Reservations
+                .CountAsync(r => spotsIds.Contains(r.ParkingSpotId) && 
+                            (r.Status == "Confirmed" || r.Status == "Pending" || r.Status == "Active"));
+
+            if (activeReservationsCount > 0)
+            {
+                TempData["Error"] = $"Nie można usunąć strefy! Miejsca w tej strefie mają {activeReservationsCount} aktywnych rezerwacji. Najpierw anuluj lub poczekaj na zakończenie rezerwacji.";
+                return RedirectToAction(nameof(Index));
+            }
+
+            // Usuń wszystkie rezerwacje dla miejsc w tej strefie
+            var allReservations = await _context.Reservations
+                .Where(r => spotsIds.Contains(r.ParkingSpotId))
+                .ToListAsync();
+
+            if (allReservations.Any())
+            {
+                _context.Reservations.RemoveRange(allReservations);
+            }
+
+            // Usuń miejsca parkingowe
+            _context.ParkingSpots.RemoveRange(zone.ParkingSpots);
+
+            // Usuń strefę
+            _context.ParkingZones.Remove(zone);
+
+            await _context.SaveChangesAsync();
+
+            TempData["Success"] = $"Strefa parkingowa została usunięta pomyślnie wraz z {zone.ParkingSpots.Count} miejscami i {allReservations.Count} rezerwacjami.";
             return RedirectToAction(nameof(Index));
         }
     }

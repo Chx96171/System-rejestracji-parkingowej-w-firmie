@@ -10,6 +10,14 @@
 }
 
 <div class="container mt-5">
+    @if (ViewBag.ActiveReservations != null && ViewBag.ActiveReservations > 0)
+    {
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <strong>⚠️ Ostrzeżenie!</strong> @ViewBag.Warning
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+
     <form asp-action="Edit" asp-route-id="@Model.Id">
         @Html.AntiForgeryToken()
 
