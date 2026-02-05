@@ -1,5 +1,7 @@
 is_global = true
 build_property.TargetFramework = net8.0
+build_property.TargetFrameworkIdentifier = .NETCoreApp
+build_property.TargetFrameworkVersion = v8.0
 build_property.TargetPlatformMinVersion = 
 build_property.UsingMicrosoftNETSdkWeb = true
 build_property.ProjectTypeGuids = 
@@ -9,129 +11,129 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = SystemRejestracjiParkingowej
 build_property.RootNamespace = SystemRejestracjiParkingowej
-build_property.ProjectDir = C:\Users\yagus\SystemRejestracjiParkingowej\
+build_property.ProjectDir = /home/runner/work/System-rejestracji-parkingowej-w-firmie/System-rejestracji-parkingowej-w-firmie/
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 8.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\yagus\SystemRejestracjiParkingowej
+build_property.MSBuildProjectDirectory = /home/runner/work/System-rejestracji-parkingowej-w-firmie/System-rejestracji-parkingowej-w-firmie
 build_property._RazorSourceGeneratorDebug = 
 build_property.EffectiveAnalysisLevelStyle = 8.0
 build_property.EnableCodeStyleSeverity = 
 
-[C:/Users/yagus/SystemRejestracjiParkingowej/Views/Account/Login.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxMb2dpbi5jc2h0bWw=
+[/home/runner/work/System-rejestracji-parkingowej-w-firmie/System-rejestracji-parkingowej-w-firmie/Views/Account/Login.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQWNjb3VudC9Mb2dpbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/yagus/SystemRejestracjiParkingowej/Views/Account/Register.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxSZWdpc3Rlci5jc2h0bWw=
+[/home/runner/work/System-rejestracji-parkingowej-w-firmie/System-rejestracji-parkingowej-w-firmie/Views/Account/Register.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQWNjb3VudC9SZWdpc3Rlci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/yagus/SystemRejestracjiParkingowej/Views/Home/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
+[/home/runner/work/System-rejestracji-parkingowej-w-firmie/System-rejestracji-parkingowej-w-firmie/Views/Home/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9JbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/yagus/SystemRejestracjiParkingowej/Views/Home/Privacy.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
+[/home/runner/work/System-rejestracji-parkingowej-w-firmie/System-rejestracji-parkingowej-w-firmie/Views/Home/Privacy.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9Qcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/yagus/SystemRejestracjiParkingowej/Views/ParkingSpots/Create.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGFya2luZ1Nwb3RzXENyZWF0ZS5jc2h0bWw=
+[/home/runner/work/System-rejestracji-parkingowej-w-firmie/System-rejestracji-parkingowej-w-firmie/Views/ParkingSpots/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUGFya2luZ1Nwb3RzL0NyZWF0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/yagus/SystemRejestracjiParkingowej/Views/ParkingSpots/Delete.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGFya2luZ1Nwb3RzXERlbGV0ZS5jc2h0bWw=
+[/home/runner/work/System-rejestracji-parkingowej-w-firmie/System-rejestracji-parkingowej-w-firmie/Views/ParkingSpots/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUGFya2luZ1Nwb3RzL0RlbGV0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/yagus/SystemRejestracjiParkingowej/Views/ParkingSpots/Details.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGFya2luZ1Nwb3RzXERldGFpbHMuY3NodG1s
+[/home/runner/work/System-rejestracji-parkingowej-w-firmie/System-rejestracji-parkingowej-w-firmie/Views/ParkingSpots/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUGFya2luZ1Nwb3RzL0RldGFpbHMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/yagus/SystemRejestracjiParkingowej/Views/ParkingSpots/Edit.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGFya2luZ1Nwb3RzXEVkaXQuY3NodG1s
+[/home/runner/work/System-rejestracji-parkingowej-w-firmie/System-rejestracji-parkingowej-w-firmie/Views/ParkingSpots/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUGFya2luZ1Nwb3RzL0VkaXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/yagus/SystemRejestracjiParkingowej/Views/ParkingSpots/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGFya2luZ1Nwb3RzXEluZGV4LmNzaHRtbA==
+[/home/runner/work/System-rejestracji-parkingowej-w-firmie/System-rejestracji-parkingowej-w-firmie/Views/ParkingSpots/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUGFya2luZ1Nwb3RzL0luZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/yagus/SystemRejestracjiParkingowej/Views/ParkingSpots/UserIndex.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGFya2luZ1Nwb3RzXFVzZXJJbmRleC5jc2h0bWw=
+[/home/runner/work/System-rejestracji-parkingowej-w-firmie/System-rejestracji-parkingowej-w-firmie/Views/ParkingSpots/UserIndex.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUGFya2luZ1Nwb3RzL1VzZXJJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/yagus/SystemRejestracjiParkingowej/Views/ParkingZones/Create.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGFya2luZ1pvbmVzXENyZWF0ZS5jc2h0bWw=
+[/home/runner/work/System-rejestracji-parkingowej-w-firmie/System-rejestracji-parkingowej-w-firmie/Views/ParkingZones/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUGFya2luZ1pvbmVzL0NyZWF0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/yagus/SystemRejestracjiParkingowej/Views/ParkingZones/Delete.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGFya2luZ1pvbmVzXERlbGV0ZS5jc2h0bWw=
+[/home/runner/work/System-rejestracji-parkingowej-w-firmie/System-rejestracji-parkingowej-w-firmie/Views/ParkingZones/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUGFya2luZ1pvbmVzL0RlbGV0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/yagus/SystemRejestracjiParkingowej/Views/ParkingZones/Details.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGFya2luZ1pvbmVzXERldGFpbHMuY3NodG1s
+[/home/runner/work/System-rejestracji-parkingowej-w-firmie/System-rejestracji-parkingowej-w-firmie/Views/ParkingZones/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUGFya2luZ1pvbmVzL0RldGFpbHMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/yagus/SystemRejestracjiParkingowej/Views/ParkingZones/Edit.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGFya2luZ1pvbmVzXEVkaXQuY3NodG1s
+[/home/runner/work/System-rejestracji-parkingowej-w-firmie/System-rejestracji-parkingowej-w-firmie/Views/ParkingZones/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUGFya2luZ1pvbmVzL0VkaXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/yagus/SystemRejestracjiParkingowej/Views/ParkingZones/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGFya2luZ1pvbmVzXEluZGV4LmNzaHRtbA==
+[/home/runner/work/System-rejestracji-parkingowej-w-firmie/System-rejestracji-parkingowej-w-firmie/Views/ParkingZones/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUGFya2luZ1pvbmVzL0luZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/yagus/SystemRejestracjiParkingowej/Views/Reservations/Cancel.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVzZXJ2YXRpb25zXENhbmNlbC5jc2h0bWw=
+[/home/runner/work/System-rejestracji-parkingowej-w-firmie/System-rejestracji-parkingowej-w-firmie/Views/Reservations/Cancel.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUmVzZXJ2YXRpb25zL0NhbmNlbC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/yagus/SystemRejestracjiParkingowej/Views/Reservations/Create.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVzZXJ2YXRpb25zXENyZWF0ZS5jc2h0bWw=
+[/home/runner/work/System-rejestracji-parkingowej-w-firmie/System-rejestracji-parkingowej-w-firmie/Views/Reservations/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUmVzZXJ2YXRpb25zL0NyZWF0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/yagus/SystemRejestracjiParkingowej/Views/Reservations/Details.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVzZXJ2YXRpb25zXERldGFpbHMuY3NodG1s
+[/home/runner/work/System-rejestracji-parkingowej-w-firmie/System-rejestracji-parkingowej-w-firmie/Views/Reservations/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUmVzZXJ2YXRpb25zL0RldGFpbHMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/yagus/SystemRejestracjiParkingowej/Views/Reservations/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVzZXJ2YXRpb25zXEluZGV4LmNzaHRtbA==
+[/home/runner/work/System-rejestracji-parkingowej-w-firmie/System-rejestracji-parkingowej-w-firmie/Views/Reservations/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUmVzZXJ2YXRpb25zL0luZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/yagus/SystemRejestracjiParkingowej/Views/Shared/Error.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
+[/home/runner/work/System-rejestracji-parkingowej-w-firmie/System-rejestracji-parkingowej-w-firmie/Views/Shared/Error.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL0Vycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/yagus/SystemRejestracjiParkingowej/Views/Shared/_ValidationScriptsPartial.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+[/home/runner/work/System-rejestracji-parkingowej-w-firmie/System-rejestracji-parkingowej-w-firmie/Views/Shared/_ValidationScriptsPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL19WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/yagus/SystemRejestracjiParkingowej/Views/Vehicles/Create.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVmVoaWNsZXNcQ3JlYXRlLmNzaHRtbA==
+[/home/runner/work/System-rejestracji-parkingowej-w-firmie/System-rejestracji-parkingowej-w-firmie/Views/Vehicles/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVmVoaWNsZXMvQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/yagus/SystemRejestracjiParkingowej/Views/Vehicles/Delete.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVmVoaWNsZXNcRGVsZXRlLmNzaHRtbA==
+[/home/runner/work/System-rejestracji-parkingowej-w-firmie/System-rejestracji-parkingowej-w-firmie/Views/Vehicles/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVmVoaWNsZXMvRGVsZXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/yagus/SystemRejestracjiParkingowej/Views/Vehicles/Details.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVmVoaWNsZXNcRGV0YWlscy5jc2h0bWw=
+[/home/runner/work/System-rejestracji-parkingowej-w-firmie/System-rejestracji-parkingowej-w-firmie/Views/Vehicles/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVmVoaWNsZXMvRGV0YWlscy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/yagus/SystemRejestracjiParkingowej/Views/Vehicles/Edit.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVmVoaWNsZXNcRWRpdC5jc2h0bWw=
+[/home/runner/work/System-rejestracji-parkingowej-w-firmie/System-rejestracji-parkingowej-w-firmie/Views/Vehicles/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVmVoaWNsZXMvRWRpdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/yagus/SystemRejestracjiParkingowej/Views/Vehicles/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVmVoaWNsZXNcSW5kZXguY3NodG1s
+[/home/runner/work/System-rejestracji-parkingowej-w-firmie/System-rejestracji-parkingowej-w-firmie/Views/Vehicles/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVmVoaWNsZXMvSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/yagus/SystemRejestracjiParkingowej/Views/_ViewImports.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
+[/home/runner/work/System-rejestracji-parkingowej-w-firmie/System-rejestracji-parkingowej-w-firmie/Views/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/yagus/SystemRejestracjiParkingowej/Views/_ViewStart.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
+[/home/runner/work/System-rejestracji-parkingowej-w-firmie/System-rejestracji-parkingowej-w-firmie/Views/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/yagus/SystemRejestracjiParkingowej/Views/Shared/_Layout.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = b-lxmmef2jha
+[/home/runner/work/System-rejestracji-parkingowej-w-firmie/System-rejestracji-parkingowej-w-firmie/Views/Shared/_Layout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL19MYXlvdXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = b-ujle7to3qc
