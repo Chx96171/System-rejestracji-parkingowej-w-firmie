@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("SystemRejestracjiParkingowej")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+590ebec9855e415035fcf78dfb9d45a436ee2df2")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5f5796ee9bcd9f5d1d5c555b71c623dc1a69e2f6")]
 [assembly: System.Reflection.AssemblyProductAttribute("SystemRejestracjiParkingowej")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SystemRejestracjiParkingowej")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

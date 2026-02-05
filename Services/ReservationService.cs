@@ -78,7 +78,7 @@ namespace SystemRejestracjiParkingowej.Services
                 return false;
 
             // Sprawdź czy rezerwacja nie jest w przeszłości
-            if (reservation.StartDate < DateTime.Now)
+            if (reservation.StartDate < DateTime.UtcNow)
                 return false;
 
             // Sprawdź długość rezerwacji

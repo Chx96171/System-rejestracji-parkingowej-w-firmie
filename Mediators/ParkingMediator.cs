@@ -84,7 +84,7 @@ namespace SystemRejestracjiParkingowej.Mediators
                 }
 
                 // Sprawdź czy można anulować (zgodnie z regułami czasowymi)
-                var now = DateTime.Now;
+                var now = DateTime.UtcNow;
                 var hoursUntilStart = (reservation.StartDate - now).TotalHours;
 
                 if (hoursUntilStart < 2) // Minimalne 2 godziny przed rozpoczęciem
@@ -120,9 +120,12 @@ namespace SystemRejestracjiParkingowej.Mediators
                     await _context.SaveChangesAsync();
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                // Logowanie błędu
+                // W produkcji należy użyć ILogger do logowania błędu
+                Console.WriteLine($"Błąd podczas aktualizacji dostępności miejsca {spotId}: {ex.Message}");
+                // Rzuć wyjątek dalej, aby nie ukrywać problemu
+                throw;
             }
         }
 
@@ -170,7 +173,7 @@ namespace SystemRejestracjiParkingowej.Mediators
                 .Where(r => r.UserId == userId 
                     && r.Status != "Cancelled" 
                     && r.Status != "Completed"
-                    && r.EndDate >= DateTime.Now)
+                    && r.EndDate >= DateTime.UtcNow)
                 .CountAsync();
 
             return count;

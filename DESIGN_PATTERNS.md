@@ -190,7 +190,7 @@ Wszystkie serwisy zarejestrowane w `Program.cs`:
 ```csharp
 builder.Services.AddScoped<IReservationService, ReservationService>();
 builder.Services.AddScoped<IVehicleService, VehicleService>();
-builder.Services.AddSingleton<IParkingMediator, ParkingMediator>();
+builder.Services.AddScoped<IParkingMediator, ParkingMediator>();
 ```
 
 ## Demonstracja
