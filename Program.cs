@@ -38,7 +38,7 @@ builder.Services.ConfigureApplicationCookie(options =>
 // Rejestracja serwisów z wzorcami projektowymi
 builder.Services.AddScoped<IReservationService, ReservationService>();
 builder.Services.AddScoped<IVehicleService, VehicleService>();
-builder.Services.AddSingleton<IParkingMediator, ParkingMediator>();
+builder.Services.AddScoped<IParkingMediator, ParkingMediator>();
 
 var app = builder.Build();
 
