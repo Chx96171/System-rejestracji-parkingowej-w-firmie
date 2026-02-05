@@ -82,6 +82,38 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUGFya2luZ1pvbmVzL0luZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[/home/runner/work/System-rejestracji-parkingowej-w-firmie/System-rejestracji-parkingowej-w-firmie/Views/Patterns/AbstractFactory.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUGF0dGVybnMvQWJzdHJhY3RGYWN0b3J5LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/runner/work/System-rejestracji-parkingowej-w-firmie/System-rejestracji-parkingowej-w-firmie/Views/Patterns/FactoryMethod.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUGF0dGVybnMvRmFjdG9yeU1ldGhvZC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/runner/work/System-rejestracji-parkingowej-w-firmie/System-rejestracji-parkingowej-w-firmie/Views/Patterns/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUGF0dGVybnMvSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/runner/work/System-rejestracji-parkingowej-w-firmie/System-rejestracji-parkingowej-w-firmie/Views/Patterns/Interpreter.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUGF0dGVybnMvSW50ZXJwcmV0ZXIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/runner/work/System-rejestracji-parkingowej-w-firmie/System-rejestracji-parkingowej-w-firmie/Views/Patterns/Mediator.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUGF0dGVybnMvTWVkaWF0b3IuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/runner/work/System-rejestracji-parkingowej-w-firmie/System-rejestracji-parkingowej-w-firmie/Views/Patterns/SimpleFactory.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUGF0dGVybnMvU2ltcGxlRmFjdG9yeS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/runner/work/System-rejestracji-parkingowej-w-firmie/System-rejestracji-parkingowej-w-firmie/Views/Patterns/Singleton.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUGF0dGVybnMvU2luZ2xldG9uLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/runner/work/System-rejestracji-parkingowej-w-firmie/System-rejestracji-parkingowej-w-firmie/Views/Patterns/Summary.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUGF0dGVybnMvU3VtbWFyeS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [/home/runner/work/System-rejestracji-parkingowej-w-firmie/System-rejestracji-parkingowej-w-firmie/Views/Reservations/Cancel.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUmVzZXJ2YXRpb25zL0NhbmNlbC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
