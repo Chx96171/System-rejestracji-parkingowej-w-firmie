@@ -1,38 +1,57 @@
 @model SystemRejestracjiParkingowej.Models.ParkingSpot
 
-<h2>Dodaj miejsce parkingowe</h2>
+@{
+    ViewData["Title"] = "Dodaj miejsce parkingowe";
+}
 
-<form asp-action="Create" method="post">
-    <div class="mb-3">
-        <label asp-for="SpotNumber" class="form-label"></label>
-        <input asp-for="SpotNumber" class="form-control" />
-        <span asp-validation-for="SpotNumber" class="text-danger"></span>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <h1>Dodaj miejsce parkingowe</h1>
+            <hr />
+
+            <form asp-action="Create" method="post">
+                @Html.AntiForgeryToken()
+
+                <div class="mb-3">
+                    <label asp-for="SpotNumber" class="form-label"></label>
+                    <input asp-for="SpotNumber" class="form-control" placeholder="np. A-01" />
+                    <span asp-validation-for="SpotNumber" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="SpotType" class="form-label"></label>
+                    <input asp-for="SpotType" class="form-control" placeholder="np. Standardowe, Dla niepełnosprawnych" />
+                    <span asp-validation-for="SpotType" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Status" class="form-label"></label>
+                    <select asp-for="Status" class="form-select">
+                        <option value="Available">Dostępne</option>
+                        <option value="Reserved">Zarezerwowane</option>
+                        <option value="Occupied">Zajęte</option>
+                    </select>
+                    <span asp-validation-for="Status" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="ParkingZoneId" class="form-label"></label>
+                    <select asp-for="ParkingZoneId" asp-items="@(ViewData["ParkingZoneId"] as SelectList)" class="form-select">
+                        <option value="">-- Wybierz strefę --</option>
+                    </select>
+                    <span asp-validation-for="ParkingZoneId" class="text-danger"></span>
+                </div>
+
+                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                    <button type="submit" class="btn btn-primary">Dodaj miejsce</button>
+                    <a asp-action="Index" class="btn btn-secondary">Anuluj</a>
+                </div>
+            </form>
+        </div>
     </div>
+</div>
 
-    <div class="mb-3">
-        <label asp-for="SpotType" class="form-label"></label>
-        <input asp-for="SpotType" class="form-control" />
-        <span asp-validation-for="SpotType" class="text-danger"></span>
-    </div>
-
-    <div class="mb-3">
-        <label asp-for="Status" class="form-label"></label>
-        <select asp-for="Status" class="form-select">
-            <option value="Available">Dostępne</option>
-            <option value="Reserved">Zarezerwowane</option>
-            <option value="Occupied">Zajęte</option>
-        </select>
-        <span asp-validation-for="Status" class="text-danger"></span>
-    </div>
-
-    <div class="mb-3">
-        <label asp-for="ParkingZoneId" class="form-label"></label>
-        <select asp-for="ParkingZoneId" asp-items="@(ViewData["ParkingZoneId"] as SelectList)" class="form-select">
-            <option value="">-- Wybierz strefę --</option>
-        </select>
-        <span asp-validation-for="ParkingZoneId" class="text-danger"></span>
-    </div>
-
-    <button type="submit" class="btn btn-primary">Dodaj</button>
-    <a asp-action="Index" class="btn btn-secondary">Anuluj</a>
-</form>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

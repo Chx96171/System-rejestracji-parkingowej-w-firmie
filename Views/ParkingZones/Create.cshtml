@@ -7,7 +7,7 @@
 <div class="container mt-5">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <h1>Utwórz nową stref�� parkingową</h1>
+            <h1>Utwórz nową strefę parkingową</h1>
             <hr />
 
             <form asp-action="Create">
@@ -15,13 +15,13 @@
 
                 <div class="mb-3">
                     <label asp-for="Name" class="form-label"></label>
-                    <input asp-for="Name" class="form-control" />
+                    <input asp-for="Name" class="form-control" placeholder="np. Strefa A" />
                     <span asp-validation-for="Name" class="text-danger"></span>
                 </div>
 
                 <div class="mb-3">
                     <label asp-for="Description" class="form-label"></label>
-                    <textarea asp-for="Description" class="form-control" rows="3"></textarea>
+                    <textarea asp-for="Description" class="form-control" rows="3" placeholder="Opis strefy parkingowej"></textarea>
                     <span asp-validation-for="Description" class="text-danger"></span>
                 </div>
 
@@ -30,14 +30,15 @@
                     <select asp-for="ZoneType" class="form-select">
                         <option value="">-- Wybierz typ --</option>
                         <option value="Underground">Podziemny</option>
-                        <option value="Outdoor">Na powietrzu</option>
+                        <option value="Outdoor">Na zewnątrz</option>
+                        <option value="Covered">Zadaszony</option>
                     </select>
                     <span asp-validation-for="ZoneType" class="text-danger"></span>
                 </div>
 
                 <div class="mb-3">
                     <label asp-for="TotalSpots" class="form-label"></label>
-                    <input asp-for="TotalSpots" type="number" class="form-control" />
+                    <input asp-for="TotalSpots" type="number" class="form-control" placeholder="np. 50" min="1" />
                     <span asp-validation-for="TotalSpots" class="text-danger"></span>
                 </div>
 

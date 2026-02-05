@@ -5,9 +5,6 @@ using System.ComponentModel.DataAnnotations;
 
 namespace SystemRejestracjiParkingowej.Controllers
 {
-    /// <summary>
-    /// Kontroler do zarządzania logowaniem, rejestracją i wylogowywaniem
-    /// </summary>
     public class AccountController : Controller
     {
         private readonly UserManager<ApplicationUser> _userManager;
@@ -24,18 +21,12 @@ namespace SystemRejestracjiParkingowej.Controllers
             _roleManager = roleManager;
         }
 
-        /// <summary>
-        /// Wyświetla stronę rejestracji
-        /// </summary>
         [HttpGet]
         public IActionResult Register()
         {
             return View();
         }
 
-        /// <summary>
-        /// Obsługuje formularz rejestracji
-        /// </summary>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Register(RegisterViewModel model)
@@ -55,16 +46,12 @@ namespace SystemRejestracjiParkingowej.Controllers
 
                 if (result.Succeeded)
                 {
-                    // Przydziel rolę "User" nowo zarejestrowanemu użytkownikowi
                     await _userManager.AddToRoleAsync(user, "User");
-
-                    // Zaloguj użytkownika
                     await _signInManager.SignInAsync(user, isPersistent: false);
 
                     return RedirectToAction("Index", "Home");
                 }
 
-                // Jeśli rejestracja się nie powiodła, dodaj błędy do modelu
                 foreach (var error in result.Errors)
                 {
                     ModelState.AddModelError(string.Empty, error.Description);
@@ -74,9 +61,6 @@ namespace SystemRejestracjiParkingowej.Controllers
             return View(model);
         }
 
-        /// <summary>
-        /// Wyświetla stronę logowania
-        /// </summary>
         [HttpGet]
         public IActionResult Login(string? returnUrl = null)
         {
@@ -84,9 +68,6 @@ namespace SystemRejestracjiParkingowej.Controllers
             return View();
         }
 
-        /// <summary>
-        /// Formularz logowania
-        /// </summary>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(LoginViewModel model, string? returnUrl = null)
@@ -119,9 +100,6 @@ namespace SystemRejestracjiParkingowej.Controllers
             return View(model);
         }
 
-        /// <summary>
-        /// Wylogowuje użytkownika
-        /// </summary>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Logout()
@@ -130,9 +108,6 @@ namespace SystemRejestracjiParkingowej.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        /// <summary>
-        /// Pomocnicza metoda do przekierowania na bezpieczny URL
-        /// </summary>
         private IActionResult RedirectToLocal(string? returnUrl)
         {
             if (Url.IsLocalUrl(returnUrl))
@@ -146,9 +121,6 @@ namespace SystemRejestracjiParkingowej.Controllers
         }
     }
 
-    /// <summary>
-    /// Model do rejestracji
-    /// </summary>
     public class RegisterViewModel
     {
         [Required(ErrorMessage = "Email jest wymagany")]
@@ -182,9 +154,6 @@ namespace SystemRejestracjiParkingowej.Controllers
         public required string ConfirmPassword { get; set; }
     }
 
-    /// <summary>
-    /// Model do logowania
-    /// </summary>
     public class LoginViewModel
     {
         [Required(ErrorMessage = "Email jest wymagany")]
