@@ -88,6 +88,17 @@ namespace SystemRejestracjiParkingowej.Controllers
             var spot = await _context.ParkingSpots.FindAsync(id);
             if (spot == null) return NotFound();
 
+            // NOWY KOD - Sprawdź aktywne rezerwacje
+            var activeReservationsCount = await _context.Reservations
+                .CountAsync(r => r.ParkingSpotId == id && 
+                            (r.Status == "Confirmed" || r.Status == "Pending" || r.Status == "Active"));
+
+            if (activeReservationsCount > 0)
+            {
+                ViewBag.ActiveReservations = activeReservationsCount;
+                ViewBag.Warning = $"UWAGA: To miejsce ma {activeReservationsCount} aktywnych rezerwacji. Zmiana statusu spowoduje ich anulowanie!";
+            }
+
             ViewData["ParkingZoneId"] = new SelectList(_context.ParkingZones, "Id", "Name", spot.ParkingZoneId);
             return View(spot);
         }
@@ -109,6 +120,28 @@ namespace SystemRejestracjiParkingowej.Controllers
                     }
 
                     spot.CreatedAt = existingSpot.CreatedAt;
+
+                    // NOWY KOD - Sprawdź czy status się zmienia z Reserved
+                    if (existingSpot.Status == "Reserved" && spot.Status != "Reserved")
+                    {
+                        // Znajdź wszystkie aktywne rezerwacje dla tego miejsca
+                        var activeReservations = await _context.Reservations
+                            .Where(r => r.ParkingSpotId == id && 
+                                   (r.Status == "Confirmed" || r.Status == "Pending" || r.Status == "Active"))
+                            .ToListAsync();
+
+                        if (activeReservations.Any())
+                        {
+                            // Anuluj rezerwacje
+                            foreach (var reservation in activeReservations)
+                            {
+                                reservation.Status = "Cancelled";
+                                _context.Update(reservation);
+                            }
+
+                            TempData["Warning"] = $"Uwaga: Anulowano {activeReservations.Count} aktywnych rezerwacji powiązanych z tym miejscem.";
+                        }
+                    }
 
                     if (existingSpot.Status != spot.Status)
                     {
@@ -158,6 +191,22 @@ namespace SystemRejestracjiParkingowej.Controllers
                 return NotFound();
             }
 
+            // NOWY KOD - Sprawdź rezerwacje
+            var activeReservationsCount = await _context.Reservations
+                .CountAsync(r => r.ParkingSpotId == id && 
+                            (r.Status == "Confirmed" || r.Status == "Pending" || r.Status == "Active"));
+
+            var totalReservationsCount = await _context.Reservations
+                .CountAsync(r => r.ParkingSpotId == id);
+
+            ViewBag.ActiveReservations = activeReservationsCount;
+            ViewBag.TotalReservations = totalReservationsCount;
+
+            if (activeReservationsCount > 0)
+            {
+                ViewBag.Error = $"To miejsce ma {activeReservationsCount} aktywnych rezerwacji i nie może zostać usunięte!";
+            }
+
             return View(spot);
         }
 
@@ -168,27 +217,47 @@ namespace SystemRejestracjiParkingowej.Controllers
             try
             {
                 var spot = await _context.ParkingSpots.FindAsync(id);
-                if (spot != null)
-                {
-                    if (spot.Status == "Available")
-                    {
-                        var zone = await _context.ParkingZones.FindAsync(spot.ParkingZoneId);
-                        if (zone != null)
-                        {
-                            zone.TotalSpots--;
-                            _context.Update(zone);
-                        }
-                    }
-
-                    _context.ParkingSpots.Remove(spot);
-                    await _context.SaveChangesAsync();
-                    TempData["Success"] = "Miejsce parkingowe zostało usunięte pomyślnie!";
-                    return RedirectToAction(nameof(Index));
-                }
-                else
+                if (spot == null)
                 {
                     return NotFound();
                 }
+
+                // NOWY KOD - Sprawdź rezerwacje
+                var allReservations = await _context.Reservations
+                    .Where(r => r.ParkingSpotId == id)
+                    .ToListAsync();
+
+                var activeReservations = allReservations
+                    .Where(r => r.Status == "Confirmed" || r.Status == "Pending" || r.Status == "Active")
+                    .ToList();
+
+                if (activeReservations.Any())
+                {
+                    TempData["Error"] = $"Nie można usunąć miejsca parkingowego! Istnieją {activeReservations.Count} aktywne rezerwacje. Najpierw anuluj rezerwacje lub poczekaj aż się zakończą.";
+                    return RedirectToAction(nameof(Index));
+                }
+
+                // Usuń wszystkie historyczne rezerwacje (zakończone/anulowane)
+                if (allReservations.Any())
+                {
+                    _context.Reservations.RemoveRange(allReservations);
+                }
+
+                // Aktualizuj licznik w strefie jeśli było Available
+                if (spot.Status == "Available")
+                {
+                    var zone = await _context.ParkingZones.FindAsync(spot.ParkingZoneId);
+                    if (zone != null && zone.TotalSpots > 0)
+                    {
+                        zone.TotalSpots--;
+                        _context.Update(zone);
+                    }
+                }
+
+                _context.ParkingSpots.Remove(spot);
+                await _context.SaveChangesAsync();
+                TempData["Success"] = "Miejsce parkingowe zostało usunięte pomyślnie!";
+                return RedirectToAction(nameof(Index));
             }
             catch (Exception ex)
             {
