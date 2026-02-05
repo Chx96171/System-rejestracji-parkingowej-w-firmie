@@ -53,8 +53,10 @@
     }
     else
     {
-        <div class="alert alert-info">
-            Nie masz jeszcze rezerwacji. <a asp-action="Create">Zarezerwuj swoje pierwsze miejsce</a>
+        <div class="text-center py-5">
+            <h3>📅 Brak rezerwacji</h3>
+            <p class="text-muted">Nie masz jeszcze żadnych rezerwacji. Zarezerwuj miejsce parkingowe już teraz!</p>
+            <a asp-action="Create" class="btn btn-primary btn-lg mt-3">Nowa rezerwacja</a>
         </div>
     }
 </div>

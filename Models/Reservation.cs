@@ -6,21 +6,26 @@ namespace SystemRejestracjiParkingowej.Models
     {
         public int Id { get; set; }
 
-        [Required(ErrorMessage = "Data rozpoczęcia rezerwacji jest wymagana.")]
+        [Required(ErrorMessage = "Data rozpoczęcia jest wymagana")]
+        [Display(Name = "Data rozpoczęcia")]
         public DateTime StartDate { get; set; }
 
-        [Required(ErrorMessage = "Data zakończenia rezerwacji jest wymagana.")]
+        [Required(ErrorMessage = "Data zakończenia jest wymagana")]
+        [Display(Name = "Data zakończenia")]
         public DateTime EndDate { get; set; }
 
-        public string Status { get; set; } = "Pending"; // Domyślnie przypisany Status
+        [Display(Name = "Status")]
+        public string Status { get; set; } = "Pending";
 
+        [Display(Name = "Miejsce parkingowe")]
         public int ParkingSpotId { get; set; }
-        public ParkingSpot? ParkingSpot { get; set; } // Pole nawigacyjne (opcjonalne)
+        public ParkingSpot? ParkingSpot { get; set; }
 
         public string? UserId { get; set; }
-        public ApplicationUser? User { get; set; } // Pole nawigacyjne (opcjonalne)
+        public ApplicationUser? User { get; set; }
 
+        [Display(Name = "Pojazd")]
         public int VehicleId { get; set; }
-        public Vehicle? Vehicle { get; set; } // Pole nawigacyjne (opcjonalne)
+        public Vehicle? Vehicle { get; set; }
     }
 }
