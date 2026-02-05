@@ -19,7 +19,6 @@
 - [Wymagania Systemowe](#-wymagania-systemowe)
 - [Instalacja i Uruchomienie](#-instalacja-i-uruchomienie)
 - [Struktura Projektu](#-struktura-projektu)
-- [Demo Wzorców Projektowych](#-demo-wzorców-projektowych)
 - [Konto Testowe](#-konto-testowe)
 - [Baza Danych](#-baza-danych)
 - [Dependency Injection](#-dependency-injection)
@@ -45,7 +44,7 @@ System oferuje pełne zarządzanie pojazdami, miejscami parkingowymi, strefami o
 - 📅 **System rezerwacji miejsc** - rezerwacje z walidacją konfliktów i limitów czasowych
 - 👥 **Role użytkowników** - Admin (pełny dostęp) i User (zarządzanie własnymi zasobami)
 - ✅ **Walidacja danych** - po stronie serwera z wykorzystaniem Data Annotations
-- 🎨 **Demonstracja wzorców projektowych** - dedykowany moduł pokazujący działanie wzorców
+- 📖 **Dokumentacja wzorców** - szczegółowy opis implementacji w plikach DESIGN_PATTERNS.md i IMPLEMENTATION_SUMMARY.md
 
 ---
 
@@ -330,7 +329,6 @@ Ctrl + C
 │   ├── ParkingSpotsController.cs # CRUD miejsc parkingowych
 │   ├── ParkingZonesController.cs # CRUD stref parkingowych
 │   ├── ReservationsController.cs # CRUD rezerwacji
-│   ├── PatternsController.cs     # Demo wzorców projektowych
 │   └── HomeController.cs         # Strona główna
 │
 ├── 📁 Data/                       # Kontekst bazy danych
@@ -393,14 +391,6 @@ Ctrl + C
 │
 ├── 📁 Views/                      # Widoki Razor
 │   ├── 📁 Account/               # Logowanie/Rejestracja
-│   ├── 📁 Patterns/              # Demo wzorców projektowych
-│   │   ├── Index.cshtml          # Lista wszystkich wzorców
-│   │   ├── SimpleFactory.cshtml  # Demo Simple Factory
-│   │   ├── FactoryMethod.cshtml  # Demo Factory Method
-│   │   ├── AbstractFactory.cshtml# Demo Abstract Factory
-│   │   ├── Singleton.cshtml      # Demo Singleton
-│   │   ├── Mediator.cshtml       # Demo Mediator
-│   │   └── Interpreter.cshtml    # Demo Interpreter
 │   ├── 📁 Vehicles/              # CRUD pojazdów
 │   ├── 📁 ParkingSpots/          # CRUD miejsc parkingowych
 │   ├── 📁 ParkingZones/          # CRUD stref parkingowych
@@ -422,35 +412,6 @@ Ctrl + C
 
 ---
 
-## 🎨 Demo Wzorców Projektowych
-
-System zawiera **dedykowany moduł demonstracyjny** dostępny dla administratorów w menu nawigacyjnym.
-
-### Dostęp do demo:
-1. Zaloguj się jako **Admin** (dane w sekcji [Konto Testowe](#-konto-testowe))
-2. Kliknij **"Wzorce Projektowe"** w górnym menu
-3. Wybierz wzorzec do demonstracji
-
-### Dostępne demonstracje:
-
-| URL | Wzorzec | Opis |
-|-----|---------|------|
-| `/Patterns` | Lista wszystkich | Przegląd wszystkich 6 wzorców |
-| `/Patterns/SimpleFactory` | Simple Factory | Tworzenie różnych typów pojazdów |
-| `/Patterns/FactoryMethod` | Factory Method | Tworzenie miejsc parkingowych |
-| `/Patterns/AbstractFactory` | Abstract Factory | Tworzenie kompletnych stref |
-| `/Patterns/Singleton` | Singleton | Globalna konfiguracja |
-| `/Patterns/Mediator` | Mediator | Koordynacja rezerwacji |
-| `/Patterns/Interpreter` | Interpreter | Walidacja reguł parkingowych |
-
-Każda demonstracja zawiera:
-- 📝 Opis wzorca
-- 💡 Przykłady użycia
-- 🖼️ Interaktywne pokazanie działania
-- 📊 Wizualizację struktury klas
-
----
-
 ## 🔑 Konto Testowe
 
 System automatycznie tworzy konto administratora przy pierwszym uruchomieniu.
@@ -469,7 +430,6 @@ Rola:     Administrator
 - ✅ Zarządzanie wszystkimi pojazdami
 - ✅ Zarządzanie miejscami i strefami parkingowymi
 - ✅ Przeglądanie wszystkich rezerwacji
-- ✅ Dostęp do demonstracji wzorców projektowych
 
 ### Tworzenie użytkownika zwykłego:
 1. Kliknij **"Rejestracja"** na stronie logowania
