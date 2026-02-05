@@ -6,9 +6,6 @@ using SystemRejestracjiParkingowej.Models;
 
 namespace SystemRejestracjiParkingowej.Controllers
 {
-    /// <summary>
-    /// Kontroler do zarządzania strefami parkingowymi
-    /// </summary>
     [Authorize(Roles = "Admin")]
     public class ParkingZonesController : Controller
     {
@@ -19,9 +16,6 @@ namespace SystemRejestracjiParkingowej.Controllers
             _context = context;
         }
 
-        /// <summary>
-        /// Wyświetla listę wszystkich stref parkingowych
-        /// </summary>
         public async Task<IActionResult> Index()
         {
             var zones = await _context.ParkingZones
@@ -30,9 +24,6 @@ namespace SystemRejestracjiParkingowej.Controllers
             return View(zones);
         }
 
-        /// <summary>
-        /// Wyświetla szczegóły strefy parkingowej
-        /// </summary>
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null) return NotFound();
@@ -46,36 +37,28 @@ namespace SystemRejestracjiParkingowej.Controllers
             return View(zone);
         }
 
-        /// <summary>
-        /// Wyświetla formularz do tworzenia nowej strefy
-        /// </summary>
         [HttpGet]
         public IActionResult Create()
         {
             return View();
         }
 
-        /// <summary>
-        /// Obsługuje tworzenie nowej strefy
-        /// </summary>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Name,Description,ZoneType")] ParkingZone zone)
         {
             if (ModelState.IsValid)
             {
-                zone.TotalSpots = 0; // Ustawienie początkowej liczby miejsc na 0
+                zone.TotalSpots = 0;
                 _context.Add(zone);
                 await _context.SaveChangesAsync();
+                TempData["Success"] = "Strefa parkingowa została utworzona pomyślnie!";
                 return RedirectToAction(nameof(Index));
             }
 
             return View(zone);
         }
 
-        /// <summary>
-        /// Wyświetla formularz do edycji strefy
-        /// </summary>
         [HttpGet]
         public async Task<IActionResult> Edit(int? id)
         {
@@ -87,9 +70,6 @@ namespace SystemRejestracjiParkingowej.Controllers
             return View(zone);
         }
 
-        /// <summary>
-        /// Obsługuje edycję strefy
-        /// </summary>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Description,ZoneType")] ParkingZone zone)
@@ -106,13 +86,13 @@ namespace SystemRejestracjiParkingowej.Controllers
 
                     if (existingZone == null) return NotFound();
 
-                    // Aktualizacja właściwości strefy
                     existingZone.Name = zone.Name;
                     existingZone.Description = zone.Description;
                     existingZone.ZoneType = zone.ZoneType;
 
                     _context.Update(existingZone);
                     await _context.SaveChangesAsync();
+                    TempData["Success"] = "Strefa parkingowa została zaktualizowana pomyślnie!";
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -127,9 +107,6 @@ namespace SystemRejestracjiParkingowej.Controllers
             return View(zone);
         }
 
-        /// <summary>
-        /// Wyświetla stronę potwierdzenia usunięcia
-        /// </summary>
         [HttpGet]
         public async Task<IActionResult> Delete(int? id)
         {
@@ -144,9 +121,6 @@ namespace SystemRejestracjiParkingowej.Controllers
             return View(zone);
         }
 
-        /// <summary>
-        /// Obsługuje usunięcie strefy
-        /// </summary>
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
@@ -157,13 +131,11 @@ namespace SystemRejestracjiParkingowej.Controllers
 
             if (zone != null)
             {
-                // Usunięcie miejsc parkingowych powiązanych z tą strefą
                 _context.ParkingSpots.RemoveRange(zone.ParkingSpots);
-
-                // Usunięcie samej strefy
                 _context.ParkingZones.Remove(zone);
 
                 await _context.SaveChangesAsync();
+                TempData["Success"] = "Strefa parkingowa została usunięta pomyślnie!";
             }
 
             return RedirectToAction(nameof(Index));

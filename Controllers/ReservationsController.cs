@@ -20,9 +20,6 @@ namespace SystemRejestracjiParkingowej.Controllers
             _userManager = userManager;
         }
 
-        /// <summary>
-        /// Wyświetla listę rezerwacji zalogowanego użytkownika.
-        /// </summary>
         public async Task<IActionResult> Index()
         {
             var user = await _userManager.GetUserAsync(User);
@@ -38,9 +35,6 @@ namespace SystemRejestracjiParkingowej.Controllers
             return View(reservations);
         }
 
-        /// <summary>
-        /// Wyświetla szczegóły rezerwacji.
-        /// </summary>
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -61,9 +55,6 @@ namespace SystemRejestracjiParkingowej.Controllers
             return View(reservation);
         }
 
-        /// <summary>
-        /// Wyświetla formularz do tworzenia nowej rezerwacji.
-        /// </summary>
         [HttpGet]
         public async Task<IActionResult> Create()
         {
@@ -71,7 +62,6 @@ namespace SystemRejestracjiParkingowej.Controllers
             if (user == null)
                 return Unauthorized();
 
-            // Przygotowanie danych dla formularza rezerwacji.
             ViewData["VehicleId"] = new SelectList(
                 await _context.Vehicles.Where(v => v.UserId == user.Id).ToListAsync(),
                 "Id",
@@ -87,9 +77,6 @@ namespace SystemRejestracjiParkingowej.Controllers
             return View();
         }
 
-        /// <summary>
-        /// Obsługuje tworzenie nowej rezerwacji.
-        /// </summary>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("ParkingSpotId,VehicleId,StartDate,EndDate")] Reservation reservation)
@@ -98,60 +85,53 @@ namespace SystemRejestracjiParkingowej.Controllers
             if (user == null)
                 return Unauthorized();
 
-            // Przypisanie wymaganych pól przed walidacją.
-            reservation.UserId = user.Id; // Ustaw wartość Id użytkownika.
-            reservation.Status = "Confirmed"; // Domyślny status rezerwacji.
+            reservation.UserId = user.Id;
+            reservation.Status = "Confirmed";
 
-            // Walidacja daty.
             if (reservation.StartDate >= reservation.EndDate)
             {
-                ModelState.AddModelError(nameof(reservation.StartDate), "Data rozpoczęcia musi być wcześniejsza niż data zakończenia rezerwacji.");
+                ModelState.AddModelError(nameof(reservation.StartDate), "Data rozpoczęcia musi być wcześniejsza niż data zakończenia");
             }
 
-            // Walidacja miejsca parkingowego.
             var spot = await _context.ParkingSpots.FindAsync(reservation.ParkingSpotId);
             if (spot == null)
             {
-                ModelState.AddModelError(nameof(reservation.ParkingSpotId), "Wybrane miejsce parkingowe nie istnieje.");
+                ModelState.AddModelError(nameof(reservation.ParkingSpotId), "Wybrane miejsce parkingowe nie istnieje");
             }
             else if (spot.Status != "Available")
             {
-                ModelState.AddModelError(nameof(reservation.ParkingSpotId), "Wybrane miejsce parkingowe jest już zajęte.");
+                ModelState.AddModelError(nameof(reservation.ParkingSpotId), "Wybrane miejsce parkingowe jest już zajęte");
             }
 
-            // Walidacja pojazdu.
             var vehicle = await _context.Vehicles.FindAsync(reservation.VehicleId);
             if (vehicle == null)
             {
-                ModelState.AddModelError(nameof(reservation.VehicleId), "Wybrany pojazd nie istnieje.");
+                ModelState.AddModelError(nameof(reservation.VehicleId), "Wybrany pojazd nie istnieje");
             }
             else if (vehicle.UserId != user.Id)
             {
-                ModelState.AddModelError(nameof(reservation.VehicleId), "Wybrany pojazd nie należy do zalogowanego użytkownika.");
+                ModelState.AddModelError(nameof(reservation.VehicleId), "Wybrany pojazd nie należy do Ciebie");
             }
 
             if (ModelState.IsValid)
             {
                 try
                 {
-                    // Oznaczenie miejsca parkingowego jako zarezerwowanego.
                     spot.Status = "Reserved";
                     _context.Update(spot);
 
                     _context.Add(reservation);
                     await _context.SaveChangesAsync();
 
-                    Console.WriteLine($"Rezerwacja została pomyślnie dodana przez użytkownika {user.UserName}.");
+                    TempData["Success"] = "Rezerwacja została utworzona pomyślnie!";
                     return RedirectToAction(nameof(Index));
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine($"Błąd podczas zapisywania rezerwacji: {ex.Message}");
-                    ModelState.AddModelError("", $"Wystąpił błąd: {ex.Message}");
+                    ModelState.AddModelError("", $"Wystąpił błąd podczas zapisywania: {ex.Message}");
                 }
             }
 
-            // Przygotowanie danych do ponownego wyświetlenia na wypadek błędów walidacji.
             ViewData["VehicleId"] = new SelectList(
                 await _context.Vehicles.Where(v => v.UserId == user.Id).ToListAsync(),
                 "Id",
@@ -169,9 +149,6 @@ namespace SystemRejestracjiParkingowej.Controllers
             return View(reservation);
         }
 
-        /// <summary>
-        /// Anulowanie rezerwacji przez użytkownika.
-        /// </summary>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Cancel(int id)
@@ -187,7 +164,6 @@ namespace SystemRejestracjiParkingowej.Controllers
             if (reservation.UserId != user.Id)
                 return Forbid();
 
-            // Anulowanie rezerwacji i zwolnienie miejsca parkingowego.
             reservation.Status = "Cancelled";
             reservation.ParkingSpot.Status = "Available";
 
@@ -195,6 +171,7 @@ namespace SystemRejestracjiParkingowej.Controllers
             _context.Update(reservation);
             await _context.SaveChangesAsync();
 
+            TempData["Success"] = "Rezerwacja została anulowana pomyślnie!";
             return RedirectToAction(nameof(Index));
         }
     }

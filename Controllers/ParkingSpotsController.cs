@@ -49,18 +49,13 @@ namespace SystemRejestracjiParkingowej.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("SpotNumber,Status,SpotType,ParkingZoneId")] ParkingSpot spot)
         {
-            Console.WriteLine("-----> Wywołano akcję CREATE");
-            Console.WriteLine($"ModelState.IsValid: {ModelState.IsValid}");
-            Console.WriteLine($"SpotNumber: {spot.SpotNumber}, Status: {spot.Status}, SpotType: {spot.SpotType}, ParkingZoneId: {spot.ParkingZoneId}");
-
             if (ModelState.IsValid)
             {
                 try
                 {
-                    spot.CreatedAt = DateTime.Now; // Przypisanie daty utworzenia
+                    spot.CreatedAt = DateTime.Now;
                     _context.Add(spot);
 
-                    // Jeśli miejsce jest dostępne, zwiększamy licznik w strefie
                     if (spot.Status == "Available")
                     {
                         var zone = await _context.ParkingZones.FindAsync(spot.ParkingZoneId);
@@ -72,21 +67,12 @@ namespace SystemRejestracjiParkingowej.Controllers
                     }
 
                     await _context.SaveChangesAsync();
-                    Console.WriteLine($"Miejsce parkingowe {spot.SpotNumber} zostało pomyślnie dodane.");
+                    TempData["Success"] = "Miejsce parkingowe zostało dodane pomyślnie!";
                     return RedirectToAction(nameof(Index));
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine($"Wystąpił błąd: {ex.Message}");
-                    ModelState.AddModelError("", $"Wystąpił błąd: {ex.Message}");
-                }
-            }
-            else
-            {
-                Console.WriteLine("-----> ModelState jest niepoprawny:");
-                foreach (var error in ModelState.Values.SelectMany(v => v.Errors))
-                {
-                    Console.WriteLine($"Walidacja błędu: {error.ErrorMessage}");
+                    ModelState.AddModelError("", $"Wystąpił błąd podczas zapisywania: {ex.Message}");
                 }
             }
 
@@ -122,10 +108,8 @@ namespace SystemRejestracjiParkingowej.Controllers
                         return NotFound();
                     }
 
-                    // Przypisanie daty utworzenia z istniejącego rekordu
                     spot.CreatedAt = existingSpot.CreatedAt;
 
-                    // Aktualizacja liczników miejsc w strefie
                     if (existingSpot.Status != spot.Status)
                     {
                         var zone = await _context.ParkingZones.FirstOrDefaultAsync(z => z.Id == spot.ParkingZoneId);
@@ -139,7 +123,7 @@ namespace SystemRejestracjiParkingowej.Controllers
 
                     _context.Update(spot);
                     await _context.SaveChangesAsync();
-                    Console.WriteLine($"Miejsce parkingowe {spot.SpotNumber} zostało pomyślnie zaktualizowane.");
+                    TempData["Success"] = "Miejsce parkingowe zostało zaktualizowane pomyślnie!";
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -154,17 +138,10 @@ namespace SystemRejestracjiParkingowej.Controllers
                 return RedirectToAction(nameof(Index));
             }
 
-            Console.WriteLine("-----> ModelState jest niepoprawny:");
-            foreach (var error in ModelState.Values.SelectMany(v => v.Errors))
-            {
-                Console.WriteLine($"Walidacja błędu: {error.ErrorMessage}");
-            }
-
             ViewData["ParkingZoneId"] = new SelectList(_context.ParkingZones, "Id", "Name", spot.ParkingZoneId);
             return View(spot);
         }
 
-        // GET: ParkingSpots/Delete/{id}
         [HttpGet]
         public async Task<IActionResult> Delete(int? id)
         {
@@ -181,10 +158,9 @@ namespace SystemRejestracjiParkingowej.Controllers
                 return NotFound();
             }
 
-            return View(spot); // Wyświetlenie widoku Delete.cshtml w celu potwierdzenia
+            return View(spot);
         }
 
-        // POST: ParkingSpots/DeleteConfirmed/{id}
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
@@ -206,18 +182,17 @@ namespace SystemRejestracjiParkingowej.Controllers
 
                     _context.ParkingSpots.Remove(spot);
                     await _context.SaveChangesAsync();
-                    Console.WriteLine($"Miejsce parkingowe o ID {id} zostało usunięte.");
+                    TempData["Success"] = "Miejsce parkingowe zostało usunięte pomyślnie!";
                     return RedirectToAction(nameof(Index));
                 }
                 else
                 {
-                    Console.WriteLine($"Nie znaleziono miejsca parkingowego o ID: {id}.");
                     return NotFound();
                 }
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Błąd podczas usuwania miejsca parkingowego: {ex.Message}");
+                TempData["Error"] = $"Błąd podczas usuwania: {ex.Message}";
                 return RedirectToAction(nameof(Index));
             }
         }
