@@ -2,6 +2,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using SystemRejestracjiParkingowej.Data;
 using SystemRejestracjiParkingowej.Models;
+using SystemRejestracjiParkingowej.Services;
+using SystemRejestracjiParkingowej.Mediators;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -32,6 +34,11 @@ builder.Services.ConfigureApplicationCookie(options =>
     options.LogoutPath = "/Account/Logout";
     options.AccessDeniedPath = "/Account/AccessDenied";
 });
+
+// Rejestracja serwisów z wzorcami projektowymi
+builder.Services.AddScoped<IReservationService, ReservationService>();
+builder.Services.AddScoped<IVehicleService, VehicleService>();
+builder.Services.AddScoped<IParkingMediator, ParkingMediator>();
 
 var app = builder.Build();
 
