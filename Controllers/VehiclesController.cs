@@ -19,7 +19,6 @@ namespace SystemRejestracjiParkingowej.Controllers
             _userManager = userManager;
         }
 
-        // Lista pojazdów użytkownika
         public async Task<IActionResult> Index()
         {
             var user = await _userManager.GetUserAsync(User);
@@ -33,7 +32,6 @@ namespace SystemRejestracjiParkingowej.Controllers
             return View(vehicles);
         }
 
-        // Szczegóły pojazdu
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -53,14 +51,12 @@ namespace SystemRejestracjiParkingowej.Controllers
             return View(vehicle);
         }
 
-        // Formularz dodawania pojazdu
         [HttpGet]
         public IActionResult Create()
         {
             return View();
         }
 
-        // Obsługa dodawania nowego pojazdu
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("VehicleType,RegistrationNumber,Brand,Model,Color")] Vehicle vehicle)
@@ -69,7 +65,6 @@ namespace SystemRejestracjiParkingowej.Controllers
             if (user == null)
                 return Unauthorized();
 
-            // Przypisanie ID użytkownika do pojazdu
             vehicle.UserId = user.Id;
 
             if (ModelState.IsValid)
@@ -79,28 +74,18 @@ namespace SystemRejestracjiParkingowej.Controllers
                     _context.Add(vehicle);
                     await _context.SaveChangesAsync();
 
-                    Console.WriteLine($"Pojazd {vehicle.RegistrationNumber} został pomyślnie dodany użytkownikowi {user.UserName}.");
+                    TempData["Success"] = "Pojazd został dodany pomyślnie!";
                     return RedirectToAction(nameof(Index));
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine($"Błąd dodawania pojazdu: {ex.Message}");
-                    ModelState.AddModelError("", $"Wystąpił błąd: {ex.Message}");
-                }
-            }
-            else
-            {
-                Console.WriteLine("ModelState jest niepoprawny:");
-                foreach (var error in ModelState.Values.SelectMany(v => v.Errors))
-                {
-                    Console.WriteLine($"Błąd walidacji: {error.ErrorMessage}");
+                    ModelState.AddModelError("", $"Wystąpił błąd podczas zapisywania: {ex.Message}");
                 }
             }
 
             return View(vehicle);
         }
 
-        // Formularz edycji pojazdu
         [HttpGet]
         public async Task<IActionResult> Edit(int? id)
         {
@@ -118,7 +103,6 @@ namespace SystemRejestracjiParkingowej.Controllers
             return View(vehicle);
         }
 
-        // Obsługa edycji pojazdu
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,VehicleType,RegistrationNumber,Brand,Model,Color")] Vehicle vehicle)
@@ -130,7 +114,6 @@ namespace SystemRejestracjiParkingowej.Controllers
             if (user == null)
                 return Unauthorized();
 
-            // Walidacja zgodności pojazdu z zalogowanym użytkownikiem
             var existingVehicle = await _context.Vehicles.AsNoTracking().FirstOrDefaultAsync(v => v.Id == id);
             if (existingVehicle?.UserId != user.Id)
                 return Forbid();
@@ -139,11 +122,11 @@ namespace SystemRejestracjiParkingowej.Controllers
             {
                 try
                 {
-                    vehicle.UserId = user.Id; // Aktualizacja UserId
+                    vehicle.UserId = user.Id;
                     _context.Update(vehicle);
                     await _context.SaveChangesAsync();
 
-                    Console.WriteLine($"Pojazd {vehicle.RegistrationNumber} został zaktualizowany.");
+                    TempData["Success"] = "Pojazd został zaktualizowany pomyślnie!";
                     return RedirectToAction(nameof(Index));
                 }
                 catch (DbUpdateConcurrencyException)
@@ -154,19 +137,10 @@ namespace SystemRejestracjiParkingowej.Controllers
                     throw;
                 }
             }
-            else
-            {
-                Console.WriteLine("ModelState jest niepoprawny:");
-                foreach (var error in ModelState.Values.SelectMany(v => v.Errors))
-                {
-                    Console.WriteLine($"Błąd walidacji: {error.ErrorMessage}");
-                }
-            }
 
             return View(vehicle);
         }
 
-        // Formularz potwierdzenia usunięcia
         [HttpGet]
         public async Task<IActionResult> Delete(int? id)
         {
@@ -185,7 +159,6 @@ namespace SystemRejestracjiParkingowej.Controllers
             return View(vehicle);
         }
 
-        // Obsługa usuwania pojazdu
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
@@ -196,11 +169,10 @@ namespace SystemRejestracjiParkingowej.Controllers
                 _context.Vehicles.Remove(vehicle);
                 await _context.SaveChangesAsync();
 
-                Console.WriteLine($"Pojazd o ID {vehicle.Id} został usunięty.");
+                TempData["Success"] = "Pojazd został usunięty pomyślnie!";
             }
             else
             {
-                Console.WriteLine($"Nie znaleziono pojazdu o ID: {id}.");
                 return NotFound();
             }
 

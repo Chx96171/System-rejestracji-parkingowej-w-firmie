@@ -48,8 +48,10 @@
     }
     else
     {
-        <div class="alert alert-info">
-            Brak stref parkingowych. <a asp-action="Create">Utwórz pierwszą strefę</a>
+        <div class="text-center py-5">
+            <h3>🗺️ Brak stref parkingowych</h3>
+            <p class="text-muted">Utwórz pierwszą strefę parkingową</p>
+            <a asp-action="Create" class="btn btn-primary btn-lg mt-3">Dodaj strefę</a>
         </div>
     }
 </div>

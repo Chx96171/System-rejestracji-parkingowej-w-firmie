@@ -48,8 +48,10 @@
     }
     else
     {
-        <div class="alert alert-info">
-            Nie masz jeszcze dodanych pojazdów. <a asp-action="Create">Dodaj swój pierwszy pojazd</a>
+        <div class="text-center py-5">
+            <h3>🚗 Nie masz jeszcze żadnych pojazdów</h3>
+            <p class="text-muted">Dodaj swój pierwszy pojazd, aby móc rezerwować miejsca parkingowe</p>
+            <a asp-action="Create" class="btn btn-primary btn-lg mt-3">Dodaj pojazd</a>
         </div>
     }
 </div>
