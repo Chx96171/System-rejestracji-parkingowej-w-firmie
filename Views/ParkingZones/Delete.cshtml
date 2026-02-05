@@ -41,7 +41,7 @@
 
                 <div class="row">
                     <div class="col-md-6">
-                        <form asp-action="Delete" method="post">
+                        <form asp-action="DeleteConfirmed" asp-route-id="@Model.Id" method="post">
                             <button type="submit" class="btn btn-danger w-100">Usuń strefę</button>
                         </form>
                     </div>
