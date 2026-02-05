@@ -1,0 +1,89 @@
+@model SystemRejestracjiParkingowej.Models.ParkingZone
+
+@{
+    ViewData["Title"] = "Szczegóły strefy";
+}
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-8">
+            <h1>@Model.Name</h1>
+            <hr />
+            
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <strong>Typ strefy:</strong> @Model.ZoneType
+                </div>
+                <div class="col-md-6">
+                    <strong>Całkowita liczba miejsc:</strong> @Model.TotalSpots
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <strong>Miejsca dostępne:</strong> 
+                    @Model.ParkingSpots.Count(s => s.Status == "Available")
+                </div>
+                <div class="col-md-6">
+                    <strong>Miejsca zajęte:</strong> 
+                    @Model.ParkingSpots.Count(s => s.Status != "Available")
+                </div>
+            </div>
+
+            @if (!string.IsNullOrEmpty(Model.Description))
+            {
+                <div class="mb-3">
+                    <strong>Opis:</strong>
+                    <p>@Model.Description</p>
+                </div>
+            }
+
+            <h3 class="mt-4">Miejsca parkingowe w tej strefie</h3>
+            @if (Model.ParkingSpots.Any())
+            {
+                <table class="table table-sm">
+                    <thead>
+                        <tr>
+                            <th>Numer</th>
+                            <th>Typ</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var spot in Model.ParkingSpots)
+                        {
+                            <tr>
+                                <td>@spot.SpotNumber</td>
+                                <td>@spot.SpotType</td>
+                                <td>
+                                    @if (spot.Status == "Available")
+                                    {
+                                        <span class="badge bg-success">Dostępne</span>
+                                    }
+                                    else if (spot.Status == "Reserved")
+                                    {
+                                        <span class="badge bg-warning">Zarezerwowane</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge bg-danger">Zajęte</span>
+                                    }
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+            else
+            {
+                <p class="text-muted">Brak miejsc parkingowych w tej strefie.</p>
+            }
+        </div>
+    </div>
+
+    <hr />
+    <div>
+        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">Edytuj</a>
+        <a asp-action="Index" class="btn btn-secondary">Powrót</a>
+    </div>
+</div>

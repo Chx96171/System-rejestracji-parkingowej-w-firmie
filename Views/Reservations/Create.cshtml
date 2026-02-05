@@ -1,0 +1,69 @@
+@model SystemRejestracjiParkingowej.Models.Reservation
+
+@{
+    ViewData["Title"] = "Nowa rezerwacja";
+
+    var vehicleSelectList = ViewData.ContainsKey("VehicleId")
+        ? (IEnumerable<SelectListItem>)ViewData["VehicleId"]
+        : Enumerable.Empty<SelectListItem>();
+
+    var parkingSpotSelectList = ViewData.ContainsKey("ParkingSpotId")
+        ? (IEnumerable<SelectListItem>)ViewData["ParkingSpotId"]
+        : Enumerable.Empty<SelectListItem>();
+}
+
+<div class="container mt-5">
+    <h1>@ViewData["Title"]</h1>
+    <hr />
+
+    @if (!ViewData.ModelState.IsValid)
+    {
+        <div class="alert alert-danger">
+            <ul>
+                @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+                {
+                    <li>@error.ErrorMessage</li>
+                }
+            </ul>
+        </div>
+    }
+
+    <form asp-action="Create" method="post">
+        @Html.AntiForgeryToken()
+
+        <div class="mb-3">
+            <label asp-for="ParkingSpotId" class="form-label">Wybierz miejsce parkingowe</label>
+            <select asp-for="ParkingSpotId" asp-items="parkingSpotSelectList" class="form-select">
+                <option value="">-- Wybierz miejsce parkingowe --</option>
+            </select>
+            <span asp-validation-for="ParkingSpotId" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="VehicleId" class="form-label">Wybierz pojazd</label>
+            <select asp-for="VehicleId" asp-items="vehicleSelectList" class="form-select">
+                <option value="">-- Wybierz pojazd --</option>
+            </select>
+            <span asp-validation-for="VehicleId" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="StartDate" class="form-label">Data rozpoczęcia</label>
+            <input asp-for="StartDate" type="datetime-local" class="form-control" />
+            <span asp-validation-for="StartDate" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="EndDate" class="form-label">Data zakończenia</label>
+            <input asp-for="EndDate" type="datetime-local" class="form-control" />
+            <span asp-validation-for="EndDate" class="text-danger"></span>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Zarezerwuj</button>
+        <a asp-action="Index" class="btn btn-secondary">Anuluj</a>
+    </form>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,55 @@
+@model IEnumerable<SystemRejestracjiParkingowej.Models.ParkingZone>
+
+@{
+    ViewData["Title"] = "Strefy parkingowe";
+}
+
+<div class="container mt-5">
+    <div class="row mb-3">
+        <div class="col-md-8">
+            <h1>Strefy parkingowe</h1>
+        </div>
+        <div class="col-md-4 text-end">
+            <a asp-action="Create" class="btn btn-primary">+ Nowa strefa</a>
+        </div>
+    </div>
+
+    @if (Model.Any())
+    {
+        <table class="table table-striped table-hover">
+            <thead class="table-dark">
+                <tr>
+                    <th>Nazwa</th>
+                    <th>Typ</th>
+                    <th>Liczba miejsc</th>
+                    <th>Liczba zajętych</th>
+                    <th>Akcje</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var zone in Model)
+                {
+                    <tr>
+                        <td>@zone.Name</td>
+                        <td>@zone.ZoneType</td>
+                        <td>@zone.TotalSpots</td>
+                        <td>
+                            @zone.ParkingSpots.Count(s => s.Status != "Available")
+                        </td>
+                        <td>
+                            <a asp-action="Details" asp-route-id="@zone.Id" class="btn btn-sm btn-info">Szczegóły</a>
+                            <a asp-action="Edit" asp-route-id="@zone.Id" class="btn btn-sm btn-warning">Edytuj</a>
+                            <a asp-action="Delete" asp-route-id="@zone.Id" class="btn btn-sm btn-danger">Usuń</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <div class="alert alert-info">
+            Brak stref parkingowych. <a asp-action="Create">Utwórz pierwszą strefę</a>
+        </div>
+    }
+</div>

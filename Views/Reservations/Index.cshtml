@@ -1,0 +1,60 @@
+@model IEnumerable<SystemRejestracjiParkingowej.Models.Reservation>
+
+@{
+    ViewData["Title"] = "Twoje rezerwacje";
+}
+
+<div class="container mt-5">
+    <div class="row mb-3">
+        <div class="col-md-8">
+            <h1>Twoje rezerwacje</h1>
+        </div>
+        <div class="col-md-4 text-end">
+            <a asp-action="Create" class="btn btn-primary">+ Nowa rezerwacja</a>
+        </div>
+    </div>
+
+    @if (Model.Any())
+    {
+        <table class="table table-striped table-hover">
+            <thead class="table-dark">
+                <tr>
+                    <th>Miejsce parkingowe</th>
+                    <th>Pojazd</th>
+                    <th>Data rozpoczęcia</th>
+                    <th>Data zakończenia</th>
+                    <th>Status</th>
+                    <th>Akcje</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var reservation in Model)
+                {
+                    <tr>
+                        <td>@reservation.ParkingSpot?.SpotNumber</td>
+                        <td>@reservation.Vehicle?.RegistrationNumber</td>
+                        <td>@reservation.StartDate.ToString("yyyy-MM-dd HH:mm")</td>
+                        <td>@reservation.EndDate.ToString("yyyy-MM-dd HH:mm")</td>
+                        <td>@reservation.Status</td>
+                        <td>
+                            <a asp-action="Details" asp-route-id="@reservation.Id" class="btn btn-sm btn-info">Szczegóły</a>
+                            @if (reservation.Status == "Pending")
+                            {
+                                <form asp-action="Cancel" asp-route-id="@reservation.Id" method="post" style="display: inline;">
+                                    @Html.AntiForgeryToken()
+                                    <button type="submit" class="btn btn-sm btn-danger">Anuluj</button>
+                                </form>
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <div class="alert alert-info">
+            Nie masz jeszcze rezerwacji. <a asp-action="Create">Zarezerwuj swoje pierwsze miejsce</a>
+        </div>
+    }
+</div>

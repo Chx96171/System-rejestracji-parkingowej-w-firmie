@@ -1,0 +1,32 @@
+@model IEnumerable<SystemRejestracjiParkingowej.Models.ParkingSpot>
+
+<h2>Dostępne miejsca parkingowe</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Numer miejsca</th>
+            <th>Typ</th>
+            <th>Status</th>
+            <th>Strefa</th>
+            <th>Akcje</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var spot in Model.Where(s => s.Status == "Available"))
+        {
+            <tr>
+                <td>@spot.SpotNumber</td>
+                <td>@spot.SpotType</td>
+                <td>@spot.Status</td>
+                <td>@spot.ParkingZone.Name</td>
+                <td>
+                    <form asp-action="Reserve" method="post">
+                        <input type="hidden" name="id" value="@spot.Id" />
+                        <button type="submit" class="btn btn-success">Zarezerwuj</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

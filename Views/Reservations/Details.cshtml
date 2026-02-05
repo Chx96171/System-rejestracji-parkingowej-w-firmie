@@ -1,0 +1,47 @@
+@model SystemRejestracjiParkingowej.Models.Reservation
+
+@{
+    ViewData["Title"] = "Szczegóły rezerwacji";
+}
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-8">
+            <h1>Szczegóły rezerwacji</h1>
+            <hr />
+            
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <strong>Miejsce parkingowe:</strong> @Model.ParkingSpot?.SpotNumber
+                </div>
+                <div class="col-md-6">
+                    <strong>Pojazd:</strong> @Model.Vehicle?.RegistrationNumber
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <strong>Data rozpoczęcia:</strong> @Model.StartDate.ToString("yyyy-MM-dd HH:mm")
+                </div>
+                <div class="col-md-6">
+                    <strong>Data zakończenia:</strong> @Model.EndDate.ToString("yyyy-MM-dd HH:mm")
+                </div>
+            </div>
+            
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <strong>Status:</strong> @Model.Status
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <hr />
+    <div>
+        <form asp-action="Cancel" asp-route-id="@Model.Id" method="post" style="display: inline-block;">
+            @Html.AntiForgeryToken()
+            <button type="submit" class="btn btn-danger">Anuluj rezerwację</button>
+        </form>
+        <a asp-action="Index" class="btn btn-secondary">Powrót</a>
+    </div>
+</div>

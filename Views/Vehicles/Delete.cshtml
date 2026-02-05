@@ -1,0 +1,17 @@
+@model SystemRejestracjiParkingowej.Models.Vehicle
+
+<div class="container mt-5">
+    <h1>Potwierdź usunięcie</h1>
+    <p>Czy na pewno chcesz usunąć pojazd o numerze rejestracyjnym <strong>@Model.RegistrationNumber</strong>?</p>
+
+    <form asp-action="Delete" method="post">
+        @Html.AntiForgeryToken()
+        <input type="hidden" asp-for="Id" />
+        <button type="submit" class="btn btn-danger">Tak, chcę usunąć</button>
+        <a asp-action="Index" class="btn btn-secondary">Anuluj</a>
+    </form>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

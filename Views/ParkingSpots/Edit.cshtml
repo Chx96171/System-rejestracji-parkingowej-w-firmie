@@ -1,0 +1,44 @@
+@model SystemRejestracjiParkingowej.Models.ParkingSpot
+
+@{
+    ViewData["Title"] = "Edytuj miejsce parkingowe";
+
+    // Przygotowanie listy ParkingZoneId
+    var parkingZoneSelectList = ViewData.ContainsKey("ParkingZoneId")
+        ? (IEnumerable<SelectListItem>)ViewData["ParkingZoneId"]
+        : Enumerable.Empty<SelectListItem>();
+}
+
+<div class="container mt-5">
+    <form asp-action="Edit" asp-route-id="@Model.Id">
+        @Html.AntiForgeryToken()
+
+        <div class="mb-3">
+            <label asp-for="SpotNumber" class="form-label"></label>
+            <input asp-for="SpotNumber" class="form-control" />
+            <span asp-validation-for="SpotNumber" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="SpotType" class="form-label"></label>
+            <select asp-for="SpotType" class="form-select">
+                <option value="Standard" selected="@((Model.SpotType == "Standard") ? "selected" : "")">Standard</option>
+                <option value="Disabled" selected="@((Model.SpotType == "Disabled") ? "selected" : "")">Dla niepełnosprawnych</option>
+                <option value="Premium" selected="@((Model.SpotType == "Premium") ? "selected" : "")">Premium</option>
+            </select>
+            <span asp-validation-for="SpotType" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="ParkingZoneId" class="form-label"></label>
+            <!-- Przygotowanie parkingZoneSelectList -->
+            <select asp-for="ParkingZoneId" asp-items="parkingZoneSelectList" class="form-select">
+                <option value="">-- Wybierz strefę --</option>
+            </select>
+            <span asp-validation-for="ParkingZoneId" class="text-danger"></span>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Zapisz zmiany</button>
+        <a asp-action="Index" class="btn btn-secondary">Anuluj</a>
+    </form>
+</div>

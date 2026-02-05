@@ -1,0 +1,50 @@
+@model SystemRejestracjiParkingowej.Models.ParkingSpot
+
+@{
+    ViewData["Title"] = "Szczegóły miejsca parkingowego";
+}
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-8">
+            <h1>Miejsce parkingowe #@Model.SpotNumber</h1>
+            <hr />
+            
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <strong>Numer:</strong> @Model.SpotNumber
+                </div>
+                <div class="col-md-6">
+                    <strong>Typ:</strong> @Model.SpotType
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <strong>Status:</strong>
+                    @if (Model.Status == "Available")
+                    {
+                        <span class="badge bg-success">Dostępne</span>
+                    }
+                    else if (Model.Status == "Reserved")
+                    {
+                        <span class="badge bg-warning">Zarezerwowane</span>
+                    }
+                    else
+                    {
+                        <span class="badge bg-danger">Zajęte</span>
+                    }
+                </div>
+                <div class="col-md-6">
+                    <strong>Strefa:</strong> @Model.ParkingZone?.Name
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <hr />
+    <div>
+        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">Edytuj</a>
+        <a asp-action="Index" class="btn btn-secondary">Powrót</a>
+    </div>
+</div>

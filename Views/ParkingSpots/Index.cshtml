@@ -1,0 +1,68 @@
+@model IEnumerable<SystemRejestracjiParkingowej.Models.ParkingSpot>
+
+@{
+    ViewData["Title"] = "Miejsca parkingowe";
+}
+
+<div class="container mt-5">
+    <div class="row mb-3">
+        <div class="col-md-8">
+            <h1>Miejsca parkingowe</h1>
+        </div>
+        <div class="col-md-4 text-end">
+            <a asp-action="Create" class="btn btn-primary">+ Nowe miejsce</a>
+        </div>
+    </div>
+
+    @if (Model.Any())
+    {
+        <table class="table table-striped table-hover">
+            <thead class="table-dark">
+                <tr>
+                    <th>Numer</th>
+                    <th>Typ</th>
+                    <th>Status</th>
+                    <th>Strefa</th>
+                    <th>Akcje</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var spot in Model)
+                {
+                    <tr>
+                        <td>@spot.SpotNumber</td>
+                        <td>@spot.SpotType</td>
+                        <td>
+                            @if (spot.Status == "Available")
+                            {
+                                <span class="badge bg-success">Dostępne</span>
+                            }
+                            else if (spot.Status == "Reserved")
+                            {
+                                <span class="badge bg-warning">Zarezerwowane</span>
+                            }
+                            else
+                            {
+                                <span class="badge bg-danger">Zajęte</span>
+                            }
+                        </td>
+                        <td>@spot.ParkingZone?.Name</td>
+                        <td>
+                            <a asp-action="Details" asp-route-id="@spot.Id" class="btn btn-sm btn-info">Szczegóły</a>
+                            <a asp-action="Edit" asp-route-id="@spot.Id" class="btn btn-sm btn-warning">Edytuj</a>
+                            <form asp-action="Delete" asp-route-id="@spot.Id" method="post" style="display: inline;">
+                                <button type="submit" class="btn btn-sm btn-danger">Usuń</button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <div class="alert alert-info">
+            Brak miejsc parkingowych. <a asp-action="Create">Utwórz pierwsze miejsce</a>
+        </div>
+    }
+</div>

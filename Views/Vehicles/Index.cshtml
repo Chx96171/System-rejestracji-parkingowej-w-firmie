@@ -1,0 +1,55 @@
+@model IEnumerable<SystemRejestracjiParkingowej.Models.Vehicle>
+
+@{
+    ViewData["Title"] = "Twoje pojazdy";
+}
+
+<div class="container mt-5">
+    <div class="row mb-3">
+        <div class="col-md-8">
+            <h1>Twoje pojazdy</h1>
+        </div>
+        <div class="col-md-4 text-end">
+            <a asp-action="Create" class="btn btn-primary">+ Nowy pojazd</a>
+        </div>
+    </div>
+
+    @if (Model.Any())
+    {
+        <table class="table table-striped table-hover">
+            <thead class="table-dark">
+                <tr>
+                    <th>Rejestracja</th>
+                    <th>Marka</th>
+                    <th>Model</th>
+                    <th>Kolor</th>
+                    <th>Typ</th>
+                    <th>Akcje</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var vehicle in Model)
+                {
+                    <tr>
+                        <td>@vehicle.RegistrationNumber</td>
+                        <td>@vehicle.Brand</td>
+                        <td>@vehicle.Model</td>
+                        <td>@vehicle.Color</td>
+                        <td>@vehicle.VehicleType</td>
+                        <td>
+                            <a asp-action="Details" asp-route-id="@vehicle.Id" class="btn btn-sm btn-info">Szczegóły</a>
+                            <a asp-action="Edit" asp-route-id="@vehicle.Id" class="btn btn-sm btn-warning">Edytuj</a>
+                            <a asp-action="Delete" asp-route-id="@vehicle.Id" class="btn btn-sm btn-danger">Usuń</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <div class="alert alert-info">
+            Nie masz jeszcze dodanych pojazdów. <a asp-action="Create">Dodaj swój pierwszy pojazd</a>
+        </div>
+    }
+</div>

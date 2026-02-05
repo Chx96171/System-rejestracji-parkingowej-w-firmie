@@ -1,0 +1,28 @@
+@model SystemRejestracjiParkingowej.Models.ParkingZone
+
+@{
+    ViewData["Title"] = "Usuń strefę";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="alert alert-danger">
+                <h4 class="alert-heading">Potwierdzenie usunięcia</h4>
+                <p>Czy na pewno chcesz usunąć strefę <strong>@Model.Name</strong>?</p>
+                <p class="mb-0">Ta operacja jest nieodwracalna!</p>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <form asp-action="DeleteConfirmed" asp-route-id="@Model.Id" method="post">
+                        <button type="submit" class="btn btn-danger w-100">Usuń strefę</button>
+                    </form>
+                </div>
+                <div class="col-md-6">
+                    <a asp-action="Index" class="btn btn-secondary w-100">Anuluj</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

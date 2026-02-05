@@ -1,0 +1,38 @@
+@model SystemRejestracjiParkingowej.Models.Vehicle
+
+@{
+    ViewData["Title"] = "Szczegóły pojazdu";
+}
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-8">
+            <h1>Szczegóły pojazdu: @Model.RegistrationNumber</h1>
+            <hr />
+            
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <strong>Marka:</strong> @Model.Brand
+                </div>
+                <div class="col-md-6">
+                    <strong>Model:</strong> @Model.Model
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <strong>Kolor:</strong> @Model.Color
+                </div>
+                <div class="col-md-6">
+                    <strong>Typ pojazdu:</strong> @Model.VehicleType
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <hr />
+    <div>
+        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">Edytuj</a>
+        <a asp-action="Index" class="btn btn-secondary">Powrót</a>
+    </div>
+</div>
