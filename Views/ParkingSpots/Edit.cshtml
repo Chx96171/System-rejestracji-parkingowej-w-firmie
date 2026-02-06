@@ -28,11 +28,13 @@
         </div>
 
         <div class="mb-3">
-            <label asp-for="SpotType" class="form-label"></label>
+            <label asp-for="SpotType" class="form-label">Typ miejsca parkingowego</label>
             <select asp-for="SpotType" class="form-select">
-                <option value="Standard" selected="@((Model.SpotType == "Standard") ? "selected" : "")">Standard</option>
-                <option value="Disabled" selected="@((Model.SpotType == "Disabled") ? "selected" : "")">Dla niepełnosprawnych</option>
-                <option value="Premium" selected="@((Model.SpotType == "Premium") ? "selected" : "")">Premium</option>
+                <option value="">-- Wybierz typ miejsca --</option>
+                <option value="Standard">Standard (normalne miejsce dla pracowników)</option>
+                <option value="VIP">VIP/Premium (duże miejsce z ładowarką dla kadry zarządzającej)</option>
+                <option value="Disabled">Dla niepełnosprawnych (poszerzone, priorytetowe)</option>
+                <option value="Electric">Z ładowarką elektryczną (ładowarka 22kW dla pojazdów elektrycznych)</option>
             </select>
             <span asp-validation-for="SpotType" class="text-danger"></span>
         </div>
