@@ -18,11 +18,6 @@ namespace SystemRejestracjiParkingowej.Models.ParkingSpots
         public string Status { get; set; } = "Available";
 
         /// <summary>
-        /// Cena za godzinę parkowania
-        /// </summary>
-        public decimal PricePerHour { get; set; }
-
-        /// <summary>
         /// Rozmiar miejsca parkingowego
         /// </summary>
         public string Size { get; set; } = "Medium";
@@ -31,6 +26,16 @@ namespace SystemRejestracjiParkingowej.Models.ParkingSpots
         /// Czy miejsce posiada ładowanie elektryczne
         /// </summary>
         public bool HasElectricCharging { get; set; } = false;
+
+        /// <summary>
+        /// Priorytet miejsca (1 = najwyższy, 5 = najniższy)
+        /// </summary>
+        public int Priority { get; set; } = 3;
+
+        /// <summary>
+        /// Opis przeznaczenia miejsca
+        /// </summary>
+        public string? Description { get; set; }
 
         /// <summary>
         /// ID strefy parkingowej
@@ -45,23 +50,22 @@ namespace SystemRejestracjiParkingowej.Models.ParkingSpots
         }
 
         /// <summary>
-        /// Oblicza koszt parkowania za określoną liczbę godzin
-        /// </summary>
-        /// <param name="hours">Liczba godzin parkowania</param>
-        /// <returns>Całkowity koszt</returns>
-        public virtual decimal CalculateCost(int hours)
-        {
-            return PricePerHour * hours;
-        }
-
-        /// <summary>
         /// Zwraca szczegółowy opis miejsca parkingowego
         /// </summary>
         /// <returns>Opis miejsca</returns>
         public virtual string GetSpotDescription()
         {
             string chargingInfo = HasElectricCharging ? "z ładowaniem elektrycznym" : "bez ładowania";
-            return $"Miejsce {SpotType} nr {SpotNumber}, rozmiar: {Size}, {PricePerHour} zł/h, {chargingInfo}";
+            return $"Miejsce {SpotType} nr {SpotNumber}, rozmiar: {Size}, {chargingInfo}";
+        }
+
+        /// <summary>
+        /// Zwraca szczegółową charakterystykę miejsca
+        /// </summary>
+        public virtual string GetSpotCharacteristics()
+        {
+            string chargingInfo = HasElectricCharging ? "z ładowarką 22kW" : "bez ładowania";
+            return $"Typ: {SpotType}, Rozmiar: {Size}, {chargingInfo}";
         }
     }
 }

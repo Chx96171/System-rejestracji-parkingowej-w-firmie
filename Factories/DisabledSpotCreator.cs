@@ -21,10 +21,11 @@ namespace SystemRejestracjiParkingowej.Factories
                 SpotNumber = spotNumber,
                 SpotType = "Disabled",
                 ParkingZoneId = zoneId,
-                PricePerHour = 0.00m, // Darmowe dla osób niepełnosprawnych
                 Size = "Large",
                 HasElectricCharging = false,
-                Status = "Available"
+                Status = "Available",
+                Priority = 1,
+                Description = "Miejsce dla osób niepełnosprawnych - poszerzone, priorytetowe"
             };
         }
     }

@@ -21,11 +21,6 @@ namespace SystemRejestracjiParkingowej.Models.ParkingSpots
         string Status { get; set; }
 
         /// <summary>
-        /// Cena za godzinę parkowania
-        /// </summary>
-        decimal PricePerHour { get; set; }
-
-        /// <summary>
         /// Rozmiar miejsca (Small, Medium, Large, XLarge)
         /// </summary>
         string Size { get; set; }
@@ -36,16 +31,15 @@ namespace SystemRejestracjiParkingowej.Models.ParkingSpots
         bool HasElectricCharging { get; set; }
 
         /// <summary>
-        /// Oblicza koszt parkowania za określoną liczbę godzin
-        /// </summary>
-        /// <param name="hours">Liczba godzin</param>
-        /// <returns>Całkowity koszt</returns>
-        decimal CalculateCost(int hours);
-
-        /// <summary>
         /// Zwraca szczegółowy opis miejsca parkingowego
         /// </summary>
         /// <returns>Opis miejsca</returns>
         string GetSpotDescription();
+
+        /// <summary>
+        /// Zwraca szczegółową charakterystykę miejsca parkingowego
+        /// </summary>
+        /// <returns>Charakterystyka miejsca</returns>
+        string GetSpotCharacteristics();
     }
 }

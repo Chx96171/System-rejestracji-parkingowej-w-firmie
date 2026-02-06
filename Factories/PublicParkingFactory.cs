@@ -33,10 +33,11 @@ namespace SystemRejestracjiParkingowej.Factories
                 SpotNumber = spotNumber,
                 SpotType = "Standard",
                 ParkingZoneId = zoneId,
-                PricePerHour = 6.00m,
                 Size = "Medium",
                 HasElectricCharging = false,
-                Status = "Available"
+                Status = "Available",
+                Priority = 3,
+                Description = "Standardowe miejsce dla odwiedzających"
             };
         }
 

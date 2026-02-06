@@ -33,10 +33,11 @@ namespace SystemRejestracjiParkingowej.Factories
                 SpotNumber = spotNumber,
                 SpotType = "Employee",
                 ParkingZoneId = zoneId,
-                PricePerHour = 2.00m, // Niższa cena dla pracowników
                 Size = "Medium",
                 HasElectricCharging = false,
-                Status = "Available"
+                Status = "Available",
+                Priority = 3,
+                Description = "Standardowe miejsce dla pracowników"
             };
         }
 
