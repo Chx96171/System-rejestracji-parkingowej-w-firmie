@@ -1,3 +1,4 @@
+// Model - Reservation
 using System.ComponentModel.DataAnnotations;
 
 namespace SystemRejestracjiParkingowej.Models

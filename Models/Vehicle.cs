@@ -1,3 +1,4 @@
+// Model - Vehicle
 using System.ComponentModel.DataAnnotations;
 
 namespace SystemRejestracjiParkingowej.Models
