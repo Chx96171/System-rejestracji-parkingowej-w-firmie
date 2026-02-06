@@ -1,3 +1,4 @@
+// Model - Application user
 using Microsoft.AspNetCore.Identity;
 
 namespace SystemRejestracjiParkingowej.Models

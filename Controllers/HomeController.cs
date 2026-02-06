@@ -1,3 +1,4 @@
+// Controller - Home
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using SystemRejestracjiParkingowej.Models;

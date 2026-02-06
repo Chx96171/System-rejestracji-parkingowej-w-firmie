@@ -1,17 +1,11 @@
+// Concrete factory - VIP
 using SystemRejestracjiParkingowej.Models;
 using SystemRejestracjiParkingowej.Models.ParkingSpots;
 
 namespace SystemRejestracjiParkingowej.Factories
 {
-    /// <summary>
-    /// Konkretna fabryka dla parkingu VIP
-    /// Abstract Factory Pattern - Concrete Factory
-    /// </summary>
     public class VipParkingFactory : IParkingZoneFactory
     {
-        /// <summary>
-        /// Tworzy strefę parkingową VIP
-        /// </summary>
         public ParkingZone CreateZone(string name, string description)
         {
             return new ParkingZone
@@ -23,9 +17,6 @@ namespace SystemRejestracjiParkingowej.Factories
             };
         }
 
-        /// <summary>
-        /// Tworzy miejsce VIP
-        /// </summary>
         public ParkingSpotBase CreateSpot(string spotNumber, int zoneId)
         {
             return new ParkingSpotBase
@@ -41,16 +32,13 @@ namespace SystemRejestracjiParkingowej.Factories
             };
         }
 
-        /// <summary>
-        /// Tworzy reguły rezerwacji dla parkingu VIP
-        /// </summary>
         public IReservationRule CreateReservationRule()
         {
             return new ReservationRule
             {
-                MaxReservationDays = 90, // Bardzo długie rezerwacje
+                MaxReservationDays = 90,
                 CanCancel = true,
-                MinCancellationHours = 1, // Krótki czas anulowania
+                MinCancellationHours = 1,
                 CanExtend = true
             };
         }

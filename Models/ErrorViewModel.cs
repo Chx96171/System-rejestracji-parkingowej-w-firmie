@@ -1,3 +1,4 @@
+// Model - Error view
 namespace SystemRejestracjiParkingowej.Models;
 
 public class ErrorViewModel

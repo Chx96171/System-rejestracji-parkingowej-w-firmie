@@ -1,3 +1,4 @@
+// Model - Parking zone
 using System.ComponentModel.DataAnnotations;
 
 namespace SystemRejestracjiParkingowej.Models

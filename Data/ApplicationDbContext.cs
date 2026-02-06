@@ -1,3 +1,4 @@
+// Database context
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using SystemRejestracjiParkingowej.Models;
@@ -20,14 +21,12 @@ namespace SystemRejestracjiParkingowej.Data
         {
             base.OnModelCreating(modelBuilder);
 
-            // Relacja ParkingSpot -> ParkingZone
             modelBuilder.Entity<ParkingSpot>()
                 .HasOne(ps => ps.ParkingZone)
                 .WithMany(pz => pz.ParkingSpots)
                 .HasForeignKey(ps => ps.ParkingZoneId)
                 .IsRequired();
 
-            // Relacja Vehicle -> ApplicationUser
             modelBuilder.Entity<Vehicle>()
                 .HasOne(v => v.User)
                 .WithMany(u => u.Vehicles)

@@ -1,3 +1,4 @@
+// Model - Parking spot
 using System.ComponentModel.DataAnnotations;
 
 namespace SystemRejestracjiParkingowej.Models

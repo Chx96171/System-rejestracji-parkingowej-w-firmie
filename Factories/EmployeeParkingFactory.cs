@@ -1,17 +1,11 @@
+// Concrete factory - Employee
 using SystemRejestracjiParkingowej.Models;
 using SystemRejestracjiParkingowej.Models.ParkingSpots;
 
 namespace SystemRejestracjiParkingowej.Factories
 {
-    /// <summary>
-    /// Konkretna fabryka dla parkingu pracowniczego
-    /// Abstract Factory Pattern - Concrete Factory
-    /// </summary>
     public class EmployeeParkingFactory : IParkingZoneFactory
     {
-        /// <summary>
-        /// Tworzy strefę parkingową dla pracowników
-        /// </summary>
         public ParkingZone CreateZone(string name, string description)
         {
             return new ParkingZone
@@ -23,9 +17,6 @@ namespace SystemRejestracjiParkingowej.Factories
             };
         }
 
-        /// <summary>
-        /// Tworzy miejsce dla parkingu pracowniczego
-        /// </summary>
         public ParkingSpotBase CreateSpot(string spotNumber, int zoneId)
         {
             return new ParkingSpotBase
@@ -41,14 +32,11 @@ namespace SystemRejestracjiParkingowej.Factories
             };
         }
 
-        /// <summary>
-        /// Tworzy reguły rezerwacji dla parkingu pracowniczego
-        /// </summary>
         public IReservationRule CreateReservationRule()
         {
             return new ReservationRule
             {
-                MaxReservationDays = 30, // Dłuższe rezerwacje dla pracowników
+                MaxReservationDays = 30,
                 CanCancel = true,
                 MinCancellationHours = 24,
                 CanExtend = true
