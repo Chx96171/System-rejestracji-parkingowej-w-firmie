@@ -263,16 +263,6 @@ bool result = rule.Interpret(context);
 | **Bootstrap** | 5.x | Framework CSS |
 | **C#** | 12.0 | Język programowania |
 
----
-
-## 🔧 Wymagania Systemowe
-
-- **.NET 8 SDK** - [Pobierz tutaj](https://dotnet.microsoft.com/download/dotnet/8.0)
-- **Visual Studio 2022** lub **VS Code** z rozszerzeniem C#
-- **Przeglądarka** - Chrome, Firefox, Edge lub Safari
-- **System operacyjny** - Windows 10+, macOS, Linux
-
----
 
 ## 📥 Instalacja i Uruchomienie
 
@@ -437,11 +427,8 @@ Rola:     Administrator
 3. Zaloguj się z nowymi danymi
 4. Rola **User** przypisana automatycznie
 
----
 
-## 🗄️ Baza Danych
 
-System używa **SQLite** - lekkiej, bezserwerowej bazy danych przechowywanej w pliku `parking.db`.
 
 ### Tabele (modele):
 
@@ -454,132 +441,9 @@ System używa **SQLite** - lekkiej, bezserwerowej bazy danych przechowywanej w p
 | `ParkingZones` | `ParkingZone` | Strefy parkingowe |
 | `Reservations` | `Reservation` | Rezerwacje miejsc |
 
-### Relacje:
-- **ApplicationUser → Vehicles** (1:N) - użytkownik może mieć wiele pojazdów
-- **ApplicationUser → Reservations** (1:N) - użytkownik może mieć wiele rezerwacji
-- **ParkingZone → ParkingSpots** (1:N) - strefa zawiera wiele miejsc
-- **ParkingSpot → Reservations** (1:N) - miejsce może mieć wiele rezerwacji (w różnych czasach)
-
-### Connection String:
-```json
-{
-  "ConnectionStrings": {
-    "DefaultConnection": "Data Source=parking.db"
-  }
-}
-```
-
----
-
-## 💉 Dependency Injection
-
-Wszystkie serwisy i wzorce są zarejestrowane w kontenerze DI w pliku `Program.cs`:
-
-```csharp
-// Kontekst bazy danych
-builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection"))
-);
-
-// ASP.NET Identity
-builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
-{
-    options.Password.RequireDigit = true;
-    options.Password.RequiredLength = 6;
-    options.Password.RequireNonAlphanumeric = false;
-    options.Password.RequireUppercase = true;
-    options.Password.RequireLowercase = true;
-})
-.AddEntityFrameworkStores<ApplicationDbContext>()
-.AddDefaultTokenProviders();
-
-// Serwisy z wzorcami projektowymi
-builder.Services.AddScoped<IReservationService, ReservationService>();
-builder.Services.AddScoped<IVehicleService, VehicleService>();
-builder.Services.AddScoped<IParkingMediator, ParkingMediator>();
-```
-
-### Cykl życia serwisów:
-- **Scoped** - nowa instancja na każde żądanie HTTP
-- Używane dla serwisów korzystających z `DbContext`
-
----
-
-## 📚 Dokumentacja Dodatkowa
-
-Projekt zawiera dodatkową dokumentację techniczną:
-
-| Plik | Opis |
-|------|------|
-| 📄 [DESIGN_PATTERNS.md](DESIGN_PATTERNS.md) | Szczegółowa dokumentacja wszystkich 6 wzorców projektowych z przykładami kodu |
-| 📄 [IMPLEMENTATION_SUMMARY.md](IMPLEMENTATION_SUMMARY.md) | Podsumowanie implementacji, statystyki i zgodność z wymaganiami |
-
 ### Dokumentacja XML
 Każda klasa i metoda w projekcie zawiera pełną dokumentację XML:
 - Opis celu i funkcjonalności
 - Parametry i typy zwracane
 - Przykłady użycia
 - Oznaczenie użytego wzorca projektowego
-
----
-
-## 👨‍💻 Autor
-
-**Autor:** Chx96171  
-**Uczelnia:** Merito Chorzów  
-**Przedmiot:** Programowanie Obiektowe - Wzorce Projektowe  
-**Rok akademicki:** 2026  
-**Typ projektu:** Projekt zaliczeniowy
-
-### Wymagania projektu:
-✅ Implementacja 6 wzorców projektowych (Simple Factory, Factory Method, Abstract Factory, Singleton, Mediator, Interpreter)  
-✅ Użycie klas abstrakcyjnych i interfejsów  
-✅ Dokumentacja XML wszystkich klas i metod  
-✅ Integracja wzorców z działającą aplikacją  
-✅ Zgodność z zasadami SOLID  
-✅ Kod w języku C# (.NET 8)
-
----
-
-## 📜 Licencja
-
-Ten projekt został stworzony na potrzeby edukacyjne jako projekt zaliczeniowy.
-
----
-
-## 🎯 Podsumowanie Wzorców
-
-| Wzorzec | Kategoria | Zastosowanie | Lokalizacja |
-|---------|-----------|--------------|-------------|
-| 🏭 Simple Factory | Kreacyjny | Tworzenie pojazdów | `Factories/VehicleFactory.cs` |
-| 🔨 Factory Method | Kreacyjny | Tworzenie miejsc parkingowych | `Factories/ParkingSpotCreator.cs` |
-| 🏗️ Abstract Factory | Kreacyjny | Tworzenie stref parkingowych | `Factories/IParkingZoneFactory.cs` |
-| 🔒 Singleton | Kreacyjny | Globalna konfiguracja | `Configuration/ParkingConfiguration.cs` |
-| 🤝 Mediator | Behawioralny | Koordynacja rezerwacji | `Mediators/ParkingMediator.cs` |
-| 📖 Interpreter | Behawioralny | Walidacja reguł parkingowych | `Interpreters/ParkingRuleInterpreter.cs` |
-
----
-
-## 🚀 Rozpocznij teraz!
-
-```bash
-# Sklonuj repozytorium
-git clone https://github.com/Chx96171/System-rejestracji-parkingowej-w-firmie.git
-
-# Przejdź do katalogu
-cd System-rejestracji-parkingowej-w-firmie
-
-# Uruchom aplikację
-dotnet run
-
-# Otwórz w przeglądarce
-# https://localhost:5001
-
-# Zaloguj się jako Admin
-# Email: admin@test.com
-# Hasło: Admin123
-```
-
----
-
-**Miłego korzystania! 🅿️**
