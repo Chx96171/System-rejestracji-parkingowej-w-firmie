@@ -1,3 +1,4 @@
+// Controller - Parking zones
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -118,7 +119,6 @@ namespace SystemRejestracjiParkingowej.Controllers
 
             if (zone == null) return NotFound();
 
-            // NOWY KOD - Sprawdź aktywne rezerwacje w całej strefie
             var spotsIds = zone.ParkingSpots.Select(s => s.Id).ToList();
             
             var activeReservationsCount = 0;
@@ -158,7 +158,6 @@ namespace SystemRejestracjiParkingowej.Controllers
                 return NotFound();
             }
 
-            // NOWY KOD - Sprawdź aktywne rezerwacje w całej strefie
             var spotsIds = zone.ParkingSpots.Select(s => s.Id).ToList();
             
             var activeReservationsCount = await _context.Reservations
@@ -171,7 +170,6 @@ namespace SystemRejestracjiParkingowej.Controllers
                 return RedirectToAction(nameof(Index));
             }
 
-            // Usuń wszystkie rezerwacje dla miejsc w tej strefie
             var allReservations = await _context.Reservations
                 .Where(r => spotsIds.Contains(r.ParkingSpotId))
                 .ToListAsync();
@@ -181,10 +179,8 @@ namespace SystemRejestracjiParkingowej.Controllers
                 _context.Reservations.RemoveRange(allReservations);
             }
 
-            // Usuń miejsca parkingowe
             _context.ParkingSpots.RemoveRange(zone.ParkingSpots);
 
-            // Usuń strefę
             _context.ParkingZones.Remove(zone);
 
             await _context.SaveChangesAsync();

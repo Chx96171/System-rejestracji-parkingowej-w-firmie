@@ -1,3 +1,4 @@
+// Controller - Parking spots
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -88,7 +89,6 @@ namespace SystemRejestracjiParkingowej.Controllers
             var spot = await _context.ParkingSpots.FindAsync(id);
             if (spot == null) return NotFound();
 
-            // NOWY KOD - Sprawdź aktywne rezerwacje
             var activeReservationsCount = await _context.Reservations
                 .CountAsync(r => r.ParkingSpotId == id && 
                             (r.Status == "Confirmed" || r.Status == "Pending" || r.Status == "Active"));
@@ -121,10 +121,8 @@ namespace SystemRejestracjiParkingowej.Controllers
 
                     spot.CreatedAt = existingSpot.CreatedAt;
 
-                    // NOWY KOD - Sprawdź czy status się zmienia z Reserved
                     if (existingSpot.Status == "Reserved" && spot.Status != "Reserved")
                     {
-                        // Znajdź wszystkie aktywne rezerwacje dla tego miejsca
                         var activeReservations = await _context.Reservations
                             .Where(r => r.ParkingSpotId == id && 
                                    (r.Status == "Confirmed" || r.Status == "Pending" || r.Status == "Active"))
@@ -132,7 +130,6 @@ namespace SystemRejestracjiParkingowej.Controllers
 
                         if (activeReservations.Any())
                         {
-                            // Anuluj rezerwacje
                             foreach (var reservation in activeReservations)
                             {
                                 reservation.Status = "Cancelled";
@@ -191,7 +188,6 @@ namespace SystemRejestracjiParkingowej.Controllers
                 return NotFound();
             }
 
-            // NOWY KOD - Sprawdź rezerwacje
             var activeReservationsCount = await _context.Reservations
                 .CountAsync(r => r.ParkingSpotId == id && 
                             (r.Status == "Confirmed" || r.Status == "Pending" || r.Status == "Active"));
@@ -222,7 +218,6 @@ namespace SystemRejestracjiParkingowej.Controllers
                     return NotFound();
                 }
 
-                // NOWY KOD - Sprawdź rezerwacje
                 var allReservations = await _context.Reservations
                     .Where(r => r.ParkingSpotId == id)
                     .ToListAsync();
@@ -237,13 +232,11 @@ namespace SystemRejestracjiParkingowej.Controllers
                     return RedirectToAction(nameof(Index));
                 }
 
-                // Usuń wszystkie historyczne rezerwacje (zakończone/anulowane)
                 if (allReservations.Any())
                 {
                     _context.Reservations.RemoveRange(allReservations);
                 }
 
-                // Aktualizuj licznik w strefie jeśli było Available
                 if (spot.Status == "Available")
                 {
                     var zone = await _context.ParkingZones.FindAsync(spot.ParkingZoneId);
