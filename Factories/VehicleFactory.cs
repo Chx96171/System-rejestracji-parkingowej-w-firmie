@@ -1,23 +1,10 @@
+// Simple Factory - Vehicles
 using SystemRejestracjiParkingowej.Models.Vehicles;
 
 namespace SystemRejestracjiParkingowej.Factories
 {
-    /// <summary>
-    /// Simple Factory - tworzy różne typy pojazdów w zależności od przekazanego typu
-    /// Wzorzec projektowy: Simple Factory Pattern
-    /// </summary>
     public class VehicleFactory
     {
-        /// <summary>
-        /// Tworzy pojazd na podstawie typu
-        /// </summary>
-        /// <param name="type">Typ pojazdu: Car, Motorcycle, Truck, Bus</param>
-        /// <param name="registrationNumber">Numer rejestracyjny</param>
-        /// <param name="brand">Marka pojazdu</param>
-        /// <param name="model">Model pojazdu</param>
-        /// <param name="color">Kolor pojazdu</param>
-        /// <returns>Nowa instancja pojazdu odpowiedniego typu</returns>
-        /// <exception cref="ArgumentException">Gdy podano nieznany typ pojazdu</exception>
         public static VehicleBase CreateVehicle(string type, string registrationNumber, string brand, string model, string color)
         {
             VehicleBase vehicle = type.ToLower() switch
@@ -38,16 +25,6 @@ namespace SystemRejestracjiParkingowej.Factories
             return vehicle;
         }
 
-        /// <summary>
-        /// Tworzy pojazd z dodatkowymi parametrami specyficznymi dla typu
-        /// </summary>
-        /// <param name="type">Typ pojazdu</param>
-        /// <param name="registrationNumber">Numer rejestracyjny</param>
-        /// <param name="brand">Marka pojazdu</param>
-        /// <param name="model">Model pojazdu</param>
-        /// <param name="color">Kolor pojazdu</param>
-        /// <param name="additionalParams">Dodatkowe parametry specyficzne dla typu pojazdu</param>
-        /// <returns>Nowa instancja pojazdu z ustawionymi dodatkowymi parametrami</returns>
         public static VehicleBase CreateVehicleWithParams(string type, string registrationNumber, string brand, string model, string color, Dictionary<string, object>? additionalParams = null)
         {
             var vehicle = CreateVehicle(type, registrationNumber, brand, model, color);
@@ -60,11 +37,6 @@ namespace SystemRejestracjiParkingowej.Factories
             return vehicle;
         }
 
-        /// <summary>
-        /// Stosuje dodatkowe parametry specyficzne dla typu pojazdu
-        /// </summary>
-        /// <param name="vehicle">Pojazd do konfiguracji</param>
-        /// <param name="parameters">Parametry do zastosowania</param>
         private static void ApplyAdditionalParameters(VehicleBase vehicle, Dictionary<string, object> parameters)
         {
             switch (vehicle)
@@ -103,10 +75,6 @@ namespace SystemRejestracjiParkingowej.Factories
             }
         }
 
-        /// <summary>
-        /// Zwraca listę dostępnych typów pojazdów
-        /// </summary>
-        /// <returns>Lista nazw typów pojazdów</returns>
         public static List<string> GetAvailableVehicleTypes()
         {
             return new List<string> { "Car", "Motorcycle", "Truck", "Bus" };

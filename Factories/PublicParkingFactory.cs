@@ -1,17 +1,11 @@
+// Concrete factory - Public
 using SystemRejestracjiParkingowej.Models;
 using SystemRejestracjiParkingowej.Models.ParkingSpots;
 
 namespace SystemRejestracjiParkingowej.Factories
 {
-    /// <summary>
-    /// Konkretna fabryka dla publicznego parkingu
-    /// Abstract Factory Pattern - Concrete Factory
-    /// </summary>
     public class PublicParkingFactory : IParkingZoneFactory
     {
-        /// <summary>
-        /// Tworzy publiczną strefę parkingową
-        /// </summary>
         public ParkingZone CreateZone(string name, string description)
         {
             return new ParkingZone
@@ -23,9 +17,6 @@ namespace SystemRejestracjiParkingowej.Factories
             };
         }
 
-        /// <summary>
-        /// Tworzy standardowe miejsce dla publicznego parkingu
-        /// </summary>
         public ParkingSpotBase CreateSpot(string spotNumber, int zoneId)
         {
             return new ParkingSpotBase
@@ -41,9 +32,6 @@ namespace SystemRejestracjiParkingowej.Factories
             };
         }
 
-        /// <summary>
-        /// Tworzy reguły rezerwacji dla publicznego parkingu
-        /// </summary>
         public IReservationRule CreateReservationRule()
         {
             return new ReservationRule
