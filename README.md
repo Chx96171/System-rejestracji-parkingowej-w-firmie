@@ -16,24 +16,14 @@
 - [Funkcjonalności](#-funkcjonalności)
 - [Wzorce Projektowe](#-wzorce-projektowe)
 - [Technologie](#-technologie)
-- [Wymagania Systemowe](#-wymagania-systemowe)
 - [Instalacja i Uruchomienie](#-instalacja-i-uruchomienie)
 - [Struktura Projektu](#-struktura-projektu)
 - [Konto Testowe](#-konto-testowe)
-- [Baza Danych](#-baza-danych)
 - [Dependency Injection](#-dependency-injection)
 - [Dokumentacja Dodatkowa](#-dokumentacja-dodatkowa)
-- [Autor](#-autor)
 
 ---
 
-## 📖 O Projekcie
-
-**System Rejestracji Parkingowej w Firmie** to kompleksowa aplikacja webowa stworzona w technologii ASP.NET Core MVC, która umożliwia zarządzanie parkingiem firmowym. Projekt został stworzony jako praca zaliczeniowa z przedmiotu **Programowanie Obiektowe - Wzorce Projektowe** i implementuje **6 klasycznych wzorców projektowych** zgodnie z książką "Gang of Four".
-
-System oferuje pełne zarządzanie pojazdami, miejscami parkingowymi, strefami oraz rezerwacjami, z wykorzystaniem nowoczesnych technologii .NET 8 i najlepszych praktyk programowania obiektowego (SOLID).
-
----
 
 ## 🚀 Funkcjonalności
 
