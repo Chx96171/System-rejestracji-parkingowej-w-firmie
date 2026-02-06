@@ -33,10 +33,11 @@ namespace SystemRejestracjiParkingowej.Factories
                 SpotNumber = spotNumber,
                 SpotType = "VIP",
                 ParkingZoneId = zoneId,
-                PricePerHour = 20.00m, // Premium cena
                 Size = "Large",
                 HasElectricCharging = true,
-                Status = "Available"
+                Status = "Available",
+                Priority = 1,
+                Description = "Miejsce VIP dla kadry zarządzającej - duże, z ładowarką elektryczną"
             };
         }
 

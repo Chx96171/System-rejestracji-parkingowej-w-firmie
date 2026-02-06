@@ -21,10 +21,11 @@ namespace SystemRejestracjiParkingowej.Factories
                 SpotNumber = spotNumber,
                 SpotType = "Electric",
                 ParkingZoneId = zoneId,
-                PricePerHour = 8.00m,
-                Size = "Medium",
+                Size = "Normal",
                 HasElectricCharging = true,
-                Status = "Available"
+                Status = "Available",
+                Priority = 2,
+                Description = "Miejsce z ładowarką dla pojazdów elektrycznych - 22kW"
             };
         }
     }
