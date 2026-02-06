@@ -33,7 +33,7 @@ namespace SystemRejestracjiParkingowej.Factories
                 SpotNumber = spotNumber,
                 SpotType = "Employee",
                 ParkingZoneId = zoneId,
-                Size = "Medium",
+                Size = "Normal",
                 HasElectricCharging = false,
                 Status = "Available",
                 Priority = 3,

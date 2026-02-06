@@ -21,7 +21,7 @@ namespace SystemRejestracjiParkingowej.Factories
                 SpotNumber = spotNumber,
                 SpotType = "Electric",
                 ParkingZoneId = zoneId,
-                Size = "Medium",
+                Size = "Normal",
                 HasElectricCharging = true,
                 Status = "Available",
                 Priority = 2,

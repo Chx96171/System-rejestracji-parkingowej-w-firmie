@@ -20,7 +20,7 @@ namespace SystemRejestracjiParkingowej.Models.ParkingSpots
         /// <summary>
         /// Rozmiar miejsca parkingowego
         /// </summary>
-        public string Size { get; set; } = "Medium";
+        public string Size { get; set; } = "Normal";
 
         /// <summary>
         /// Czy miejsce posiada ładowanie elektryczne
@@ -28,7 +28,8 @@ namespace SystemRejestracjiParkingowej.Models.ParkingSpots
         public bool HasElectricCharging { get; set; } = false;
 
         /// <summary>
-        /// Priorytet miejsca (1 = najwyższy, 5 = najniższy)
+        /// Priorytet miejsca (1 = najwyższy priorytet rezerwacji, 5 = najniższy)
+        /// Określa kolejność dostępu do miejsc i maksymalny czas rezerwacji
         /// </summary>
         public int Priority { get; set; } = 3;
 
