@@ -4,11 +4,11 @@
 
 - **System logowania i rejestracji** - ASP.NET Identity z rolami (Admin, User)
 - **Zarządzanie pojazdami** - CRUD dla różnych typów pojazdów (samochody, motocykle, ciężarówki, autobusy)
-- **Zarządzanie miejscami parkingowymi** - różne typy miejsc 
-- **Zarządzanie strefami parkingowymi** 
+- **Zarządzanie miejscami parkingowymi** - różne typy miejsc (Standard, VIP, dla niepełnosprawnych, elektryczne)
+- **Zarządzanie strefami parkingowymi** - strefy publiczne, pracownicze i VIP
 - **System rezerwacji miejsc** - rezerwacje z walidacją konfliktów i limitów czasowych
 - **Role użytkowników** - Admin (pełny dostęp) i User (zarządzanie własnymi zasobami)
-- **Walidacja danych** - po stronie serwera 
+- **Walidacja danych** - po stronie serwera
 
 ### Dane logowania:
 
