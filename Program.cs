@@ -35,13 +35,11 @@ builder.Services.ConfigureApplicationCookie(options =>
     options.AccessDeniedPath = "/Account/AccessDenied";
 });
 
-// Rejestracja serwisów z wzorcami projektowymi
 builder.Services.AddScoped<IReservationService, ReservationService>();
 builder.Services.AddScoped<IVehicleService, VehicleService>();
 builder.Services.AddScoped<IParkingMediator, ParkingMediator>();
 
 var app = builder.Build();
-
 
 using (var scope = app.Services.CreateScope())
 {
@@ -58,7 +56,6 @@ using (var scope = app.Services.CreateScope())
         }
     }
 
-    // Admin test
     var adminEmail = "admin@test.com";
     var adminUser = await userManager.FindByEmailAsync(adminEmail);
     
@@ -82,7 +79,6 @@ using (var scope = app.Services.CreateScope())
     }
 }
 
-// Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
@@ -93,7 +89,6 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-
 
 app.UseAuthentication();
 app.UseAuthorization();
