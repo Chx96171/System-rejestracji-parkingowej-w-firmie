@@ -20,10 +20,10 @@ Data zakończenia: 2026-02-05
 - Interfejs produktu: `IParkingSpot`
 - Baza produktu: `ParkingSpotBase`
 - Creators konkretne:
-  - `StandardSpotCreator` - 5 zł/h
-  - `VipSpotCreator` - 15 zł/h, duże, z ładowaniem
-  - `DisabledSpotCreator` - darmowe, duże
-  - `ElectricSpotCreator` - 8 zł/h, z ładowaniem
+  - `StandardSpotCreator` - rozmiar normalny, dla pracowników
+  - `VipSpotCreator` - rozmiar duży, z ładowaniem, dla kadry zarządzającej
+  - `DisabledSpotCreator` - rozmiar duży, priorytetowe
+  - `ElectricSpotCreator` - rozmiar normalny, ładowarka 22kW
 
 ### 3. ✅ Abstract Factory Pattern
 **Lokalizacja:** `Factories/IParkingZoneFactory.cs`
@@ -242,3 +242,16 @@ Implementacja jest:
 - ✅ Gotowa do produkcji
 
 **Status: ZAKOŃCZONO POMYŚLNIE** ✅
+
+## 💡 Uwaga o parkingu firmowym
+
+System zarządza **parkingiem firmowym - DARMOWYM** dla pracowników.
+
+Miejsca parkingowe nie mają cen. Różnią się:
+- Typem (Standard, VIP, Electric, Disabled)
+- Rozmiarem (Small, Normal, Large)
+- Wyposażeniem (ładowarka elektryczna)
+- Przeznaczeniem (dla pracowników, kadry, osób niepełnosprawnych)
+- Priorytetem rezerwacji (VIP = 90 dni, Standard = 30 dni)
+
+Wszystkie wzorce projektowe (Factory Method, Abstract Factory) różnicują miejsca po charakterystyce, nie po cenie.

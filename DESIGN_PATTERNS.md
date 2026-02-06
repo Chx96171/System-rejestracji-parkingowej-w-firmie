@@ -4,6 +4,19 @@
 
 System rejestracji parkingowej w firmie implementuje **6 kluczowych wzorców projektowych** zgodnie z wymaganiami zaliczenia. Każdy wzorzec został starannie zaimplementowany i zintegrowany z istniejącym systemem ASP.NET Core.
 
+## 💡 Parking firmowy - DARMOWY
+
+**UWAGA:** System zarządza parkingiem firmowym, który jest **bezpłatny** dla pracowników.
+
+Miejsca różnicowane są po:
+- **Typie**: Standard, VIP, Electric, Disabled
+- **Rozmiarze**: Small, Normal, Large
+- **Wyposażeniu**: Ładowarka elektryczna (tak/nie)
+- **Przeznaczeniu**: Dla pracowników, kadry zarządzającej, osób niepełnosprawnych
+- **Priorytecie**: 1 (najwyższy) - 5 (najniższy)
+
+Wzorce **Factory Method** i **Abstract Factory** różnicują miejsca po tych charakterystykach, a **nie po cenie**.
+
 ## Wzorce Projektowe
 
 ### 1. Simple Factory Pattern 🏭
@@ -39,10 +52,10 @@ var motorcycle = VehicleFactory.CreateVehicle("Motorcycle", "WB67890", "Honda", 
 - **Klasa bazowa produktu:** `ParkingSpotBase`
 - **Creator abstrakcyjny:** `ParkingSpotCreator` z metodą `CreateParkingSpot()`
 - **Creators konkretne:**
-  - `StandardSpotCreator` - tworzy standardowe miejsca (5 zł/h)
-  - `VipSpotCreator` - tworzy miejsca VIP (15 zł/h, duże, z ładowaniem)
-  - `DisabledSpotCreator` - tworzy miejsca dla niepełnosprawnych (darmowe, duże)
-  - `ElectricSpotCreator` - tworzy miejsca z ładowaniem elektrycznym (8 zł/h)
+  - `StandardSpotCreator` - tworzy standardowe miejsca (rozmiar normalny, dla pracowników)
+  - `VipSpotCreator` - tworzy miejsca VIP (rozmiar duży, z ładowaniem, dla kadry zarządzającej)
+  - `DisabledSpotCreator` - tworzy miejsca dla niepełnosprawnych (rozmiar duży, priorytetowe)
+  - `ElectricSpotCreator` - tworzy miejsca z ładowaniem elektrycznym (rozmiar normalny, ładowarka 22kW)
 
 **Użycie:**
 ```csharp
@@ -63,9 +76,9 @@ var vipSpot = creator.CreateAndConfigureSpot("V1", zoneId);
   - `CreateSpot()` - tworzy miejsce parkingowe
   - `CreateReservationRule()` - tworzy reguły rezerwacji
 - **Factories konkretne:**
-  - `PublicParkingFactory` - parking publiczny (7 dni max, 2h anulowanie)
-  - `EmployeeParkingFactory` - parking pracowniczy (30 dni max, 24h anulowanie, niższe ceny)
-  - `VipParkingFactory` - parking VIP (90 dni max, 1h anulowanie, premium ceny)
+  - `PublicParkingFactory` - parking publiczny (7 dni max rezerwacji, 2h na anulowanie)
+  - `EmployeeParkingFactory` - parking pracowniczy (30 dni max rezerwacji, 24h na anulowanie)
+  - `VipParkingFactory` - parking VIP (90 dni max rezerwacji, 1h na anulowanie)
 
 **Użycie:**
 ```csharp

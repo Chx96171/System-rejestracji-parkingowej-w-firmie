@@ -38,6 +38,23 @@
 
 ---
 
+## 💡 Parking firmowy - DARMOWY
+
+System zarządza **parkingiem firmowym**, który jest **bezpłatny** dla pracowników. 
+
+Miejsca parkingowe różnią się:
+
+| Typ | Rozmiar | Ładowarka | Dla kogo | Priorytet | Max rezerwacja |
+|-----|---------|-----------|----------|-----------|----------------|
+| **Standard** | Normal | ❌ | Pracownicy | Normalny | 30 dni |
+| **VIP** | Large | ✅ | Kadra zarządzająca | Najwyższy | 90 dni |
+| **Electric** | Normal | ✅ | Pojazdy elektryczne | Wysoki | 30 dni |
+| **Disabled** | Large | ❌ | Osoby niepełnosprawne | Najwyższy | 60 dni |
+
+**Wzorce projektowe** różnicują miejsca po ich **charakterystyce** (typ, rozmiar, wyposażenie), a nie po cenie.
+
+---
+
 ## 🏗️ Wzorce Projektowe
 
 System implementuje **6 wzorców projektowych** zgodnie z wymaganiami projektu zaliczeniowego:
@@ -91,19 +108,19 @@ var motorcycle = VehicleFactory.CreateVehicle(
 // Tworzenie miejsca VIP
 ParkingSpotCreator vipCreator = new VipSpotCreator();
 var vipSpot = vipCreator.CreateAndConfigureSpot("V1", zoneId);
-// Cena: 15 zł/h, duże miejsce, z ładowaniem
+// Rozmiar: Large, z ładowaniem, dla kadry zarządzającej
 
 // Tworzenie miejsca standardowego
 ParkingSpotCreator standardCreator = new StandardSpotCreator();
 var standardSpot = standardCreator.CreateAndConfigureSpot("A1", zoneId);
-// Cena: 5 zł/h, standardowe miejsce
+// Rozmiar: Medium, standardowe miejsce dla pracowników
 ```
 
 **Creators konkretne:**
-- `StandardSpotCreator` - miejsce standardowe (5 zł/h)
-- `VipSpotCreator` - miejsce VIP (15 zł/h, duże, z ładowaniem)
-- `DisabledSpotCreator` - miejsce dla niepełnosprawnych (darmowe, duże)
-- `ElectricSpotCreator` - miejsce z ładowaniem elektrycznym (8 zł/h)
+- `StandardSpotCreator` - miejsce standardowe (rozmiar normalny, dla pracowników)
+- `VipSpotCreator` - miejsce VIP (rozmiar duży, z ładowaniem, dla kadry zarządzającej)
+- `DisabledSpotCreator` - miejsce dla niepełnosprawnych (rozmiar duży, priorytetowe)
+- `ElectricSpotCreator` - miejsce z ładowaniem elektrycznym (rozmiar normalny, ładowarka 22kW)
 
 ---
 
@@ -123,13 +140,13 @@ var zone = vipFactory.CreateZone("Strefa VIP", "Parking premium");
 var spot = vipFactory.CreateSpot("V-A1", zone.Id);
 var rules = vipFactory.CreateReservationRule();
 
-// Reguły VIP: 90 dni max rezerwacji, 1h na anulowanie, wyższe ceny
+// Reguły VIP: 90 dni max rezerwacji, 1h na anulowanie
 ```
 
 **Fabryki konkretne:**
-- `PublicParkingFactory` - parking publiczny (7 dni max, 2h anulowanie)
-- `EmployeeParkingFactory` - parking pracowniczy (30 dni max, 24h anulowanie)
-- `VipParkingFactory` - parking VIP (90 dni max, 1h anulowanie)
+- `PublicParkingFactory` - parking publiczny (7 dni max rezerwacji, 2h na anulowanie)
+- `EmployeeParkingFactory` - parking pracowniczy (30 dni max rezerwacji, 24h na anulowanie)
+- `VipParkingFactory` - parking VIP (90 dni max rezerwacji, 1h na anulowanie)
 
 ---
 
