@@ -29,17 +29,14 @@
                     <label asp-for="ZoneType" class="form-label"></label>
                     <select asp-for="ZoneType" class="form-select">
                         <option value="">-- Wybierz typ --</option>
-                        <option value="Underground">Podziemny</option>
-                        <option value="Outdoor">Na zewnątrz</option>
-                        <option value="Covered">Zadaszony</option>
+                        <option value="VIP">VIP (90 dni max rezerwacji)</option>
+                        <option value="Employee">Pracownicza (30 dni max rezerwacji)</option>
+                        <option value="Public">Publiczna (7 dni max rezerwacji)</option>
+                        <option value="Underground">Podziemny (30 dni max rezerwacji)</option>
+                        <option value="Outdoor">Na zewnątrz (30 dni max rezerwacji)</option>
+                        <option value="Covered">Zadaszony (30 dni max rezerwacji)</option>
                     </select>
                     <span asp-validation-for="ZoneType" class="text-danger"></span>
-                </div>
-
-                <div class="mb-3">
-                    <label asp-for="TotalSpots" class="form-label"></label>
-                    <input asp-for="TotalSpots" type="number" class="form-control" placeholder="np. 50" min="1" />
-                    <span asp-validation-for="TotalSpots" class="text-danger"></span>
                 </div>
 
                 <div class="d-grid gap-2 d-md-flex justify-content-md-end">
