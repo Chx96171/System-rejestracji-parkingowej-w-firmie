@@ -42,5 +42,12 @@ namespace SystemRejestracjiParkingowej.Services
         /// <param name="reservation">Rezerwacja do walidacji</param>
         /// <returns>True jeśli dane są poprawne</returns>
         bool ValidateReservation(Reservation reservation);
+
+        /// <summary>
+        /// Waliduje dane rezerwacji (asynchronicznie) - sprawdza także limit strefy
+        /// </summary>
+        /// <param name="reservation">Rezerwacja do walidacji</param>
+        /// <returns>True jeśli dane są poprawne</returns>
+        Task<bool> ValidateReservationAsync(Reservation reservation);
     }
 }

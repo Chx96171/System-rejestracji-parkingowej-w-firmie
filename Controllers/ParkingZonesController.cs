@@ -49,7 +49,21 @@ namespace SystemRejestracjiParkingowej.Controllers
         {
             if (ModelState.IsValid)
             {
+                // Ustaw TotalSpots na 0 - będzie aktualizowane przy dodawaniu miejsc
                 zone.TotalSpots = 0;
+                
+                // Ustaw MaxReservationDays w zależności od typu strefy
+                zone.MaxReservationDays = zone.ZoneType switch
+                {
+                    "VIP" => 90,        // VIP - 90 dni
+                    "Employee" => 30,   // Pracownicy - 30 dni
+                    "Public" => 7,      // Publiczny - 7 dni
+                    "Underground" => 30,
+                    "Outdoor" => 30,
+                    "Covered" => 30,
+                    _ => 30             // Domyślnie 30 dni
+                };
+                
                 _context.Add(zone);
                 await _context.SaveChangesAsync();
                 TempData["Success"] = "Strefa parkingowa została utworzona pomyślnie!";

@@ -28,7 +28,7 @@ namespace SystemRejestracjiParkingowej.Services
         /// </summary>
         public async Task<bool> CreateReservation(Reservation reservation)
         {
-            if (!ValidateReservation(reservation))
+            if (!await ValidateReservationAsync(reservation))
                 return false;
 
             // Użyj mediatora do koordynacji procesu rezerwacji
@@ -84,6 +84,36 @@ namespace SystemRejestracjiParkingowej.Services
             // Sprawdź długość rezerwacji
             var days = (reservation.EndDate - reservation.StartDate).Days;
             if (!_config.ValidateReservationDays(days))
+                return false;
+
+            return true;
+        }
+
+        /// <summary>
+        /// Waliduje dane rezerwacji asynchronicznie - sprawdza także limit strefy
+        /// </summary>
+        public async Task<bool> ValidateReservationAsync(Reservation reservation)
+        {
+            // Sprawdź czy data zakończenia jest późniejsza niż rozpoczęcia
+            if (reservation.EndDate <= reservation.StartDate)
+                return false;
+
+            // Sprawdź czy rezerwacja nie jest w przeszłości
+            if (reservation.StartDate < DateTime.UtcNow)
+                return false;
+
+            var days = (reservation.EndDate - reservation.StartDate).Days;
+            
+            // Sprawdź limit konkretnej strefy parkingowej
+            var spot = await _context.ParkingSpots
+                .Include(s => s.ParkingZone)
+                .FirstOrDefaultAsync(s => s.Id == reservation.ParkingSpotId);
+            
+            if (spot?.ParkingZone == null)
+                return false;
+            
+            // Użyj limitu z konkretnej strefy zamiast globalnego
+            if (days > spot.ParkingZone.MaxReservationDays)
                 return false;
 
             return true;

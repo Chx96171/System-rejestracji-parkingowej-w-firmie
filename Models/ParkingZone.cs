@@ -21,6 +21,9 @@ namespace SystemRejestracjiParkingowej.Models
         [Display(Name = "Liczba miejsc")]
         public int TotalSpots { get; set; }
 
+        [Display(Name = "Maksymalny czas rezerwacji (dni)")]
+        public int MaxReservationDays { get; set; } = 30;
+
         public ICollection<ParkingSpot> ParkingSpots { get; set; } = new List<ParkingSpot>();
     }
 }
